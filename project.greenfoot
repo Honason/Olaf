@@ -1,5 +1,4 @@
 #Greenfoot project file
-class.Air.superclass=
 class.Forest.image=tree2.png
 class.Forest.superclass=greenfoot.World
 class.Ground.image=brick.jpg
@@ -20,7 +19,7 @@ mainWindow.width=824
 mainWindow.x=378
 mainWindow.y=198
 package.numDependencies=3
-package.numTargets=4
+package.numTargets=3
 project.charset=UTF-8
 target1.editor.height=700
 target1.editor.width=900

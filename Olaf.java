@@ -76,7 +76,6 @@ public class Olaf extends Actor
         weight = weight + acceleration;
     }
     public void moveRight(){
-        if ()
         setLocation (getX() + speed, getY() );
     }
     public void moveLeft(){
