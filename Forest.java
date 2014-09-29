@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class Forest here.
@@ -14,7 +15,7 @@ public class Forest extends World
      * 
      */
     private static final String bgImageName = "forest_day.png";  
-    private static final double scrollSpeed = 5;  
+    private static final int scrollSpeed = 5;  
     private static final int picWidth = (new GreenfootImage(bgImageName)).getWidth();
     private static final Olaf main = new Olaf(); 
   
@@ -23,7 +24,7 @@ public class Forest extends World
     public Forest()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(900, 600, 1); 
+        super(900, 600, 1, false); 
         setBackground(bgImageName);  
         bgImage = new GreenfootImage(getBackground());  
         bgBase = new GreenfootImage(picWidth, getHeight());  
@@ -37,18 +38,24 @@ public class Forest extends World
      */
     private void prepare()
     {
-        Ground ground = new Ground();
-        addObject(ground, 308, 300);
+        //Ground ground = new Ground();
+        for(int i = 0; i < 20; i++) {
+            if(i == 5 || i == 8 || i == 12 || i == 13 || i == 18) continue;
+            Ground ground = new Ground();
+            addObject(ground, i*107, 553);
+        }
         addObject(main, 312, 144);
     }
    public void act() {
          if(main.getX() >= 500 && Greenfoot.isKeyDown("right")) {
              scrollPosition -= scrollSpeed;
+             moveAllObjects(-scrollSpeed);
              if(scrollPosition < -picWidth) scrollPosition = 0;
              
             }
          else if(main.getX() <= 200 && Greenfoot.isKeyDown("left")) {
              scrollPosition += scrollSpeed;
+             moveAllObjects(scrollSpeed);
              if(scrollPosition > 0) scrollPosition = -picWidth;
             }
          paint(scrollPosition);  
@@ -59,4 +66,12 @@ public class Forest extends World
         bg.drawImage(bgBase, position, 0);  
         bg.drawImage(bgImage, position + picWidth, 0);  
    }
+   
+   private void moveAllObjects(int distance) {
+       List<Ground> objects = getObjects(Ground.class);
+       for(int i = 0; i < objects.size(); i++) {
+           objects.get(i).setLocation(objects.get(i).getX() + distance, objects.get(i).getY());
+           //objects.get(i).turn(5);
+        }
+    }
 }
