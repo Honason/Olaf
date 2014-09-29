@@ -24,10 +24,10 @@ public class Olaf extends Actor
     
     private void checkKeys() {
         if (Greenfoot.isKeyDown("left")) {
-            moveLeft();
+            if(getX() > 200) moveLeft();
         }
         if (Greenfoot.isKeyDown("right")) {
-            moveRight();
+            if(getX() < 500) moveRight();
         }
         if (Greenfoot.isKeyDown("up")) {
             jump();

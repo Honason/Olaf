@@ -42,12 +42,12 @@ public class Forest extends World
         addObject(main, 312, 144);
     }
    public void act() {
-         if(main.getX() == 500) {
+         if(main.getX() >= 500 && Greenfoot.isKeyDown("right")) {
              scrollPosition -= scrollSpeed;
              if(scrollPosition < -picWidth) scrollPosition = 0;
              
             }
-         else if(main.getX() == 200) {
+         else if(main.getX() <= 200 && Greenfoot.isKeyDown("left")) {
              scrollPosition += scrollSpeed;
              if(scrollPosition > 0) scrollPosition = -picWidth;
             }
