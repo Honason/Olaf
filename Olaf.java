@@ -8,8 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Olaf extends Actor
 {
-    private int speed = 10;
-    private int weight = 5;
+    private int speed = 4;
+    private int weight = 1;
+    private int acceleration = 1;
     
     /**
      * Act - do whatever the Olaf wants to do. This method is called whenever
@@ -18,7 +19,7 @@ public class Olaf extends Actor
     public void act() 
     {
         checkKeys();
-        fall();
+        checkFall();
     }    
     
     private void checkKeys() {
@@ -28,12 +29,54 @@ public class Olaf extends Actor
         if (Greenfoot.isKeyDown("right")) {
             moveRight();
         }
+        if (Greenfoot.isKeyDown("up")) {
+            jump();
+        }
+    }
+    
+    public void jump() {
+        if (onGround()==true) {
+            weight = -20;
+            fall();
+        }
+    }
+    
+    public void checkFall(){
+        if (onGround()) {
+            weight = 0;
+        } else {
+            fall();
+        }
+    }
+    
+    public boolean onGround() {
+        Actor under = getOneObjectAtOffset (0, getImage().getHeight()/2, Ground.class);
+        return under != null;
     }
     
     public void fall(){
-        setLocation (getX(), getY() + weight);
+        //setLocation (getX(), getY() + weight);
+        
+         if (weight < 0) {
+            for (int i=weight/2; i<=0; i++) {
+                setLocation (getX(), getY() - 1);
+                if (onGround()) {
+                    break;
+                }
+            }
+        } else {
+            for (int i=0; i<=weight/2; i++) {
+                setLocation (getX(), getY() + 1);
+                if (onGround()) {
+                    break;
+                }
+            }
+        }
+        
+        weight = weight + acceleration;
     }
     public void moveRight(){
+        if ()
         setLocation (getX() + speed, getY() );
     }
     public void moveLeft(){
