@@ -53,7 +53,7 @@ public class Forest extends World
              if(scrollPosition < -picWidth) scrollPosition = 0;
              
             }
-         else if(main.getX() <= 200 && Greenfoot.isKeyDown("left")) {
+         else if(main.getX() <= 300 && Greenfoot.isKeyDown("left")) {
              scrollPosition += scrollSpeed;
              moveAllObjects(scrollSpeed);
              if(scrollPosition > 0) scrollPosition = -picWidth;

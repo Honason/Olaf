@@ -11,6 +11,7 @@ public class Olaf extends Actor
     private int speed = 4;
     private int weight = 1;
     private int acceleration = 1;
+    private int inJump = 0;
     
     /**
      * Act - do whatever the Olaf wants to do. This method is called whenever
@@ -24,7 +25,7 @@ public class Olaf extends Actor
     
     private void checkKeys() {
         if (Greenfoot.isKeyDown("left")) {
-            if(getX() > 200) moveLeft();
+            if(getX() > 300) moveLeft();
         }
         if (Greenfoot.isKeyDown("right")) {
             if(getX() < 500) moveRight();
@@ -38,6 +39,11 @@ public class Olaf extends Actor
         if (onGround()==true) {
             weight = -20;
             fall();
+            inJump = 1;
+        } else if (inJump==2) {
+            weight = -20;
+            fall();
+            inJump = 3;
         }
     }
     
@@ -51,7 +57,14 @@ public class Olaf extends Actor
     
     public boolean onGround() {
         Actor under = getOneObjectAtOffset (0, getImage().getHeight()/2, Ground.class);
+        if (under!=null) {
+            inJump = 0;
+        }
         return under != null;
+    }
+    
+    public int getJump(){
+        return inJump;
     }
     
     public void fall(){
@@ -73,6 +86,9 @@ public class Olaf extends Actor
             }
         }
         
+        if (!Greenfoot.isKeyDown("up") && inJump==1) {
+            inJump = inJump + 1;
+        }
         weight = weight + acceleration;
     }
     public void moveRight(){
