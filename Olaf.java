@@ -17,7 +17,7 @@ public class Olaf extends Actor
     private int chgImgIn = 2;   
     private int imgNum = 1;
     private int chgImg = 0; 
-    private String[] marioimages = { "mario1.png", "mario2.png", "mario3.png", "mario4.png" };  
+    private String[] marioimages = { "mario1.png", "mario2.png", "mario3.png", "mario4.png", "mario5.png" };
     
     /**
      * Act - do whatever the Olaf wants to do. This method is called whenever
@@ -38,9 +38,7 @@ public class Olaf extends Actor
                 imgNum--;
             }
             
-            Forest myForest = (Forest) getWorld();
-            Olaf myOlaf = myForest.getOlaf();
-            myOlaf.setImage(marioimages[imgNum]);
+            setImage(marioimages[imgNum]);
         }
     }    
     
@@ -61,6 +59,9 @@ public class Olaf extends Actor
         }
         if (Greenfoot.isKeyDown("up")) {
             jump();
+        }
+        if (Greenfoot.isKeyDown("space")) {
+            
         }
     }
     
