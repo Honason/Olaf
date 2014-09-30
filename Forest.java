@@ -17,7 +17,7 @@ public class Forest extends World
     private static final String bgImageName = "forest_day.png";  
     private static final int scrollSpeed = 5;  
     private static final int picWidth = (new GreenfootImage(bgImageName)).getWidth();
-    private static final Olaf main = new Olaf(); 
+    private static final Olaf main = new Olaf();
   
     private GreenfootImage bgImage, bgBase;  
     private int scrollPosition = 0;  
@@ -29,6 +29,7 @@ public class Forest extends World
         bgImage = new GreenfootImage(getBackground());  
         bgBase = new GreenfootImage(picWidth, getHeight());  
         bgBase.drawImage(bgImage, 0, 0); 
+        
         prepare();
     }
 
@@ -45,6 +46,14 @@ public class Forest extends World
             addObject(ground, i*107, 553);
         }
         addObject(main, 312, 144);
+        
+        if (!getObjects(Olaf.class).isEmpty())  
+        {  
+            for (Object olaf : getObjects(Olaf.class))  
+            {  
+                ((Olaf) olaf).setImage("mario1.png");   
+            }  
+        }  
     }
    public void act() {
          if(main.getX() >= 500 && Greenfoot.isKeyDown("right")) {
@@ -74,4 +83,8 @@ public class Forest extends World
            //objects.get(i).turn(5);
         }
     }
+    
+   public Olaf getOlaf() {
+       return main;
+   }
 }

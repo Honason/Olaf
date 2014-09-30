@@ -13,6 +13,12 @@ public class Olaf extends Actor
     private int acceleration = 1;
     private int inJump = 0;
     
+    static final int CHG_RATE = 8;
+    private int chgImgIn = 2;   
+    private int imgNum = 1;
+    private int chgImg = 0; 
+    private String[] marioimages = { "mario1.png", "mario2.png", "mario3.png", "mario4.png" };  
+    
     /**
      * Act - do whatever the Olaf wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -21,13 +27,36 @@ public class Olaf extends Actor
     {
         checkKeys();
         checkFall();
+        
+        if (chgImgIn == 1) {  
+            chgImgIn = CHG_RATE; // reset countdown  
+            
+            chgImg = (chgImg + 1) % 2;
+            if(chgImg == 0) {
+                imgNum++;
+            } else {
+                imgNum--;
+            }
+            
+            Forest myForest = (Forest) getWorld();
+            Olaf myOlaf = myForest.getOlaf();
+            myOlaf.setImage(marioimages[imgNum]);
+        }
     }    
+    
+    public int getChangeIn(){
+        return chgImgIn;
+    }
     
     private void checkKeys() {
         if (Greenfoot.isKeyDown("left")) {
+            chgImgIn = chgImgIn - 1;
+            imgNum = 2;
             if(getX() > 300) moveLeft();
         }
         if (Greenfoot.isKeyDown("right")) {
+            chgImgIn = chgImgIn - 1;
+            imgNum = 1;
             if(getX() < 500) moveRight();
         }
         if (Greenfoot.isKeyDown("up")) {
