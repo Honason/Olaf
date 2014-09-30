@@ -45,6 +45,11 @@ public class Forest extends World
             Ground ground = new Ground();
             addObject(ground, i*107, 553);
         }
+        //Ground ground = new Ground();
+        addObject(new Ground(), 428, 446);
+        addObject(new Ground(), 428, 339);
+        addObject(new Ground(), 642, 446);
+        
         addObject(main, 312, 144);
         
         if (!getObjects(Olaf.class).isEmpty())  
@@ -56,13 +61,12 @@ public class Forest extends World
         }  
     }
    public void act() {
-         if(main.getX() >= 500 && Greenfoot.isKeyDown("right")) {
+         if(main.getX() >= 500 && Greenfoot.isKeyDown("right") && !main.isRightObstacle()) {
              scrollPosition -= scrollSpeed;
              moveAllObjects(-scrollSpeed);
              if(scrollPosition < -picWidth) scrollPosition = 0;
-             
             }
-         else if(main.getX() <= 300 && Greenfoot.isKeyDown("left")) {
+         else if(main.getX() <= 300 && Greenfoot.isKeyDown("left") && !main.isLeftObstacle()) {
              scrollPosition += scrollSpeed;
              moveAllObjects(scrollSpeed);
              if(scrollPosition > 0) scrollPosition = -picWidth;
