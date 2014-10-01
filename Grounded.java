@@ -10,11 +10,11 @@ import java.util.Arrays;
  */
 public class Grounded extends Actor
 {
-    public int speed = 0; // Olaf's speed
-    public int weight = 1; // Olaf's gravity
+    public int speed = 0; // Actor's speed
+    public int weight = 1; // Actor's gravity
     public int acceleration = 1;
     public int inJump = 0; // 0 = not jumping, 1 = in first jump, 2 = in second jump
-    public boolean actorRight = true; // Olaf heading right? False if left.
+    public boolean actorRight = true; // Actor heading right? False if left.
 
     public final int CHG_RATE = 5; // N. of loops between image change
     public int chgImgIn = 2; // Change image in X loops
