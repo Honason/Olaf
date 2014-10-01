@@ -25,8 +25,9 @@ public class Levels extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(width, height, cellsize, bounded);
-        
+
     }
+
     public void act() {
 
     }  
@@ -53,10 +54,10 @@ public class Levels extends World
     }
 
     public void moveAllObjects(int distance) {
-        List<Ground> objects = getObjects(Ground.class);
+        List<Actor> objects = getObjects(Actor.class);
         for(int i = 0; i < objects.size(); i++) {
+            if(objects.get(i) == main) continue;
             objects.get(i).setLocation(objects.get(i).getX() + distance, objects.get(i).getY());
-            //objects.get(i).turn(5);
         }
     }
 
