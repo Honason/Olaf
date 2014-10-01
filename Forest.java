@@ -65,17 +65,18 @@ public class Forest extends World
              scrollPosition -= scrollSpeed;
              moveAllObjects(-scrollSpeed);
              if(scrollPosition < -picWidth) scrollPosition = 0;
+             paint(scrollPosition);
             }
          else if(main.getX() <= 300 && Greenfoot.isKeyDown("left") && !main.isLeftObstacle()) {
              scrollPosition += scrollSpeed;
              moveAllObjects(scrollSpeed);
              if(scrollPosition > 0) scrollPosition = -picWidth;
-            }
-         paint(scrollPosition);  
+             paint(scrollPosition);
+            } 
    }  
       
-    private void paint(int position) {  
-        GreenfootImage bg = getBackground();  
+    private void paint(int position) {
+        GreenfootImage bg = getBackground();
         bg.drawImage(bgBase, position, 0);  
         bg.drawImage(bgImage, position + picWidth, 0);  
    }

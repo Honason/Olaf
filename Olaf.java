@@ -1,4 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * Write a description of class Olaf here.
@@ -18,8 +20,13 @@ public class Olaf extends Actor
     private int chgImgIn = 2; // Change image in X loops
     private int imgNum = 1; // Image ID
     private int chgImg = 0; // Are we supposed to change the picture? 0/1
-    private String[] marioimages = { "mario1.png", "mario2.png", "mario3.png", "mario4.png", "mario5.png" }; 
-    
+    private String[] marioimages = { "mario1.png", "mario2.png", "mario3.png", "mario4.png", "mario5.png", "mario6.png" }; 
+
+    private int attacking = -1;  
+    private int animationSpeed = 4;
+    private boolean spaceLastPressed = false;
+    private String[] enemies = { "Goomba", "Bowser"}; 
+
     /**
      * Act - do whatever the Olaf wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -28,29 +35,28 @@ public class Olaf extends Actor
     {
         checkKeys();
         checkFall();
-        
+
         if (chgImgIn == 1) {  
             chgImgIn = CHG_RATE; // reset countdown  
-            
+
             chgImg = (chgImg + 1) % 2;
             if(chgImg == 0) {
                 imgNum++;
             } else {
                 imgNum--;
             }    
-            
+
             if(onGround()) {
                 setImage(marioimages[imgNum]);
             }
-            
 
         }
     }    
-    
+
     public int getChangeIn(){
         return chgImgIn;
     }
-    
+
     private void checkKeys() {
         if (Greenfoot.isKeyDown("left")) {
             if(!isLeftObstacle()){
@@ -67,25 +73,36 @@ public class Olaf extends Actor
                 if(getX() < 500) moveRight();
             }
         } else {
-            if (Greenfoot.getKey()==null) {
-                Forest myForest = (Forest) getWorld();
-                Olaf myOlaf = myForest.getOlaf();
+            if (attacking != -1)  
+            {  
+                /*if (dir == 0)  
+                    attDir = dir;  
+                else  
+                    attDir = dir + 7;  */
+                setImage(marioimages[attacking / animationSpeed + 4]);
+                attack();
+                if (++attacking > 1 * animationSpeed) attacking = -1;
+           } else if (Greenfoot.isKeyDown("space") && !spaceLastPressed) {
+                spaceLastPressed = true;
+                attacking = 0;
+                if(getImage().getWidth() == 17) setLocation(getX() + 4, getY());
+            }
+            else if(spaceLastPressed && !Greenfoot.isKeyDown("space")) spaceLastPressed = false;
+            else if (Greenfoot.getKey()==null) {
                 if(olafRight==true){
-                    myOlaf.setImage(marioimages[0]);
+                    //setImage(marioimages[0]);
                 } else {
-                    myOlaf.setImage(marioimages[1]);
+                    //setImage(marioimages[1]);
                 }
             }
         }
-        
+
         if (Greenfoot.isKeyDown("up")) {
             jump();
         }
-        if (Greenfoot.isKeyDown("space")) {
-            
-        }
+
     }
-    
+
     public void jump() {
         if (onGround()==true) {
             weight = -20;
@@ -97,75 +114,87 @@ public class Olaf extends Actor
             inJump = 3;
         }
     }
-    
+
     public void checkFall(){
         if (onGround()) {
             weight = 0;
         } else {
-            Forest myForest = (Forest) getWorld();
-            Olaf myOlaf = myForest.getOlaf();
-            
             if(olafRight==true){
-                myOlaf.setImage(marioimages[2]); 
+                setImage(marioimages[2]); 
             } else {
-                myOlaf.setImage(marioimages[3]);
+                setImage(marioimages[3]);
             }
             fall();
         }
     }
-    
+
     public boolean onGround() {
-        Actor under = getOneObjectAtOffset (0, getImage().getHeight()/2, Ground.class);
+        Actor under = getOneObjectAtOffset(0, getImage().getHeight()/2, Ground.class);
         if (under!=null) {
             inJump = 0;
         }
         return under != null;
     }
+
     public boolean isRightObstacle() {
-        Actor right = getOneObjectAtOffset (10, 0, Ground.class);
+        Actor right = getOneObjectAtOffset(10, 0, Ground.class);
         return right != null;
     }
+
     public boolean isLeftObstacle() {
-        Actor left = getOneObjectAtOffset (-10, 0, Ground.class);
+        Actor left = getOneObjectAtOffset(-10, 0, Ground.class);
         return left != null;
     }
-    
+
     public int getJump(){
         return inJump;
     }
-    
+
     public void fall(){
         //setLocation (getX(), getY() + weight);
-        
-         if (weight < 0) {
+
+        if (weight < 0) {
             for (int i=weight/2; i<=0; i++) {
-                setLocation (getX(), getY() - 1);
+                setLocation(getX(), getY() - 1);
                 if (onGround()) {
                     break;
                 }
             }
         } else {
             for (int i=0; i<=weight/2; i++) {
-                setLocation (getX(), getY() + 1);
+                setLocation(getX(), getY() + 1);
                 if (onGround()) {
                     break;
                 }
             }
         }
-        
+
         if (!Greenfoot.isKeyDown("up") && inJump==1) {
             inJump = inJump + 1;
         }
         weight = weight + acceleration;
     }
-    public void moveRight(){
-        if(!isRightObstacle()){
-            setLocation (getX() + speed, getY() );
+
+    public void attack() {
+        List<Object> objs = getIntersectingObjects( null );
+         if (objs.size() > 0)  
+        {  
+            for(int i = 0; i < objs.size(); i++) {
+                if(Arrays.asList(enemies).indexOf(objs.get(i).getClass()) > -1) ;//objs.get(i).takeDamage();
+            }
+            
         }
     }
+
+    public void moveRight(){
+        if(!isRightObstacle()){
+            setLocation(getX() + speed, getY() );
+        }
+    }
+
     public void moveLeft(){
         if(!isLeftObstacle()){
-            setLocation (getX() - speed, getY() );
+            setLocation(getX() - speed, getY() );
         }
     }
 }
