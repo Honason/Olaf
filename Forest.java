@@ -15,7 +15,7 @@ public class Forest extends World
      * 
      */
     private static final String bgImageName = "forest_day.png";  
-    private static final int scrollSpeed = 5;  
+    private static final int scrollSpeed = 4;  
     private static final int picWidth = (new GreenfootImage(bgImageName)).getWidth();
     private static final Olaf main = new Olaf();
   
