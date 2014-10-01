@@ -61,13 +61,13 @@ public class Enemy extends Grounded
     }
     
     public int nearOlaf() {
-        if (Forest.main.getX() > getX() && (Forest.main.getX()-getX() > 30) && (Forest.main.getY() == getY())) {
+        if (Levels.main.getX() > getX() && (Levels.main.getX()-getX() > 30) && (Levels.main.getY() == getY())) {
             return 1;
         }
-        if (Forest.main.getX() < getX() && (getX()-Forest.main.getX() > 30) && (Forest.main.getY() == getY()) ) {
+        if (Levels.main.getX() < getX() && (getX()-Levels.main.getX() > 30) && (Levels.main.getY() == getY()) ) {
             return 2;
         }
-        if (Forest.main.getY() != getY() ) {
+        if (Levels.main.getY() != getY() ) {
             return 0;
         }
         return 3;
