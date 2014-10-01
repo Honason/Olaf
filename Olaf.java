@@ -10,7 +10,10 @@ import java.util.Arrays;
  */
 public class Olaf extends Grounded
 {   
+    private int health = 3;
+    private boolean animating = false;
     public Olaf(){
+        animating = false;
         speed = 4;
         for(int i=0; i<6; i++) {
             sprites[i] = "mario" + (i+1) + ".png";
@@ -19,9 +22,9 @@ public class Olaf extends Grounded
 
     public void act() 
     {   
-        checkKeys();
+        if(xWeight == 0) checkKeys();
         checkFall();
-
+        if(outOfBounds()) deathAnimation();
         if (chgImgIn == 1) {  
             chgImgIn = CHG_RATE; // reset countdown  
 
@@ -88,7 +91,26 @@ public class Olaf extends Grounded
         }
 
     }
-
-    
+    public void takeDamage(Actor troubleMaker) {
+        if(getX() <= troubleMaker.getX()) knockback(-7,-7);
+        else knockback(7,-7);
+        if(--health == 0) {
+            animating = false;
+            Levels lvl = (Levels)getWorld();
+            lvl.endGame();
+        }
+    }
+    public void deathAnimation() {
+        if(!animating) {
+            animating = true;
+            weight = -20;
+            inJump = 3;
+            fall();
+        } else {
+            animating = false;
+            Levels lvl = (Levels)getWorld();
+            lvl.endGame();
+        }
+    }
 
 }

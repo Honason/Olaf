@@ -12,6 +12,7 @@ public class Grounded extends Actor
 {
     public int speed = 0; // Actor's speed
     public int weight = 1; // Actor's gravity
+    public int xWeight = 0; // Actor's horizontal gravity
     public int acceleration = 1;
     public int inJump = 0; // 0 = not jumping, 1 = in first jump, 2 = in second jump
     public boolean actorRight = true; // Actor heading right? False if left.
@@ -44,10 +45,16 @@ public class Grounded extends Actor
             inJump = 3;
         }
     }
+    public void knockback(int xPower, int yPower) {
+        weight = xPower;
+        xWeight = yPower;
+        fall();
+    }
 
     public void checkFall(){
         if (onGround()) {
             weight = 0;
+            xWeight = 0;
         } else {
             if(actorRight==true){
                 setImage(sprites[2]); 
@@ -65,7 +72,9 @@ public class Grounded extends Actor
         }
         return under != null;
     }
-
+    public boolean outOfBounds() {
+        return (getY() >= getWorld().getHeight());
+    }
     public boolean isRightObstacle() {
         Actor right = getOneObjectAtOffset(10, 0, Ground.class);
         return right != null;
@@ -79,7 +88,10 @@ public class Grounded extends Actor
     public int getJump(){
         return inJump;
     }
-
+    public Object getActiveLevel() {
+        Forest forest = new Forest();
+        return forest;
+    }
     public void fall(){
         //setLocation (getX(), getY() + weight);
 
@@ -95,14 +107,31 @@ public class Grounded extends Actor
                 setLocation(getX(), getY() + 1);
                 if (onGround()) {
                     break;
+                } else if(outOfBounds()) {
+                    //if(String.valueOf(this.getClass()).equals(String.valueOf(Olaf.class))) {Greenfoot.setWorld(new Forest());
                 }
             }
         }
-
+        if(xWeight < 0) {
+            for (int i=xWeight/2; i<=0; i++) {
+                setLocation(getX() - 1, getY());
+                if (onGround()) {
+                    break;
+                }
+            }
+        } else if(xWeight > 0) {
+            for (int i=0; i<=xWeight/2; i++) {
+                setLocation(getX() + 1, getY());
+                if (onGround()) {
+                    break;
+                }
+            }
+        }
         if (!Greenfoot.isKeyDown("up") && inJump==1) {
             inJump = inJump + 1;
         }
         weight = weight + acceleration;
+        //xWeight = xWeight + acceleration;
     }
 
     public void attack() {
