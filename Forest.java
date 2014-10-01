@@ -17,7 +17,8 @@ public class Forest extends World
     private static final String bgImageName = "forest_day.png";  
     private static final int scrollSpeed = 4;  
     private static final int picWidth = (new GreenfootImage(bgImageName)).getWidth();
-    private static final Olaf main = new Olaf();
+    public static final Olaf main = new Olaf();
+    private static final EvilViking evil1 = new EvilViking();
   
     private GreenfootImage bgImage, bgBase;  
     private int scrollPosition = 0;  
@@ -51,6 +52,7 @@ public class Forest extends World
         addObject(new Ground(), 642, 446);
         
         addObject(main, 312, 144);
+        addObject(evil1, 200, 100);
         
         if (!getObjects(Olaf.class).isEmpty())  
         {  
@@ -82,10 +84,10 @@ public class Forest extends World
    }
    
    private void moveAllObjects(int distance) {
-       List<Ground> objects = getObjects(Ground.class);
+       List<Actor> objects = getObjects(Actor.class);
        for(int i = 0; i < objects.size(); i++) {
+           if(objects.get(i) == main) continue;
            objects.get(i).setLocation(objects.get(i).getX() + distance, objects.get(i).getY());
-           //objects.get(i).turn(5);
         }
     }
     

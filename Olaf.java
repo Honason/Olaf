@@ -45,19 +45,9 @@ public class Olaf extends Grounded
 
     private void checkKeys() {
         if (Greenfoot.isKeyDown("left")) {
-            if(!isLeftObstacle()){
-                actorRight = false;
-                chgImgIn = chgImgIn - 1;
-                imgNum = 2;
-                if(getX() > 300) moveLeft();
-            }
+            moveLeft();
         } else if (Greenfoot.isKeyDown("right")) {
-            if(!isRightObstacle()){
-                actorRight = true;
-                chgImgIn = chgImgIn - 1;
-                imgNum = 1;
-                if(getX() < 500) moveRight();
-            }
+            moveRight();
         } else {
             if (attacking != -1)  
             {  
@@ -89,6 +79,27 @@ public class Olaf extends Grounded
 
     }
 
+    public void moveRight(){
+        if(!isRightObstacle()){
+            actorRight = true;
+            chgImgIn = chgImgIn - 1;
+            imgNum = 1;
+            if(getX() < 500) {
+                setLocation(getX() + speed, getY() );
+            }
+        }
+    }
+
+    public void moveLeft(){
+        if(!isLeftObstacle()){
+            actorRight = false;
+            chgImgIn = chgImgIn - 1;
+            imgNum = 2;
+            if(getX() > 300) {
+                setLocation(getX() - speed, getY() );
+            }
+        }
+    }
     
 
 }

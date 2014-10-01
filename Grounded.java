@@ -116,15 +116,4 @@ public class Grounded extends Actor
         }
     }
     
-    public void moveRight(){
-        if(!isRightObstacle()){
-            setLocation(getX() + speed, getY() );
-        }
-    }
-
-    public void moveLeft(){
-        if(!isLeftObstacle()){
-            setLocation(getX() - speed, getY() );
-        }
-    }
 }
