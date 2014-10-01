@@ -26,6 +26,7 @@ public class Forest extends Levels
        bgImage = new GreenfootImage(getBackground());  
        bgBase = new GreenfootImage(picWidth, getHeight());  
        bgBase.drawImage(bgImage, 0, 0); 
+       private static final EvilViking evil1 = new EvilViking();
         
        prepare();
     }
@@ -48,6 +49,7 @@ public class Forest extends Levels
         addObject(new Ground(), 642, 446);
         
         addObject(main, 312, 144);
+        addObject(evil1, 200, 100);
         
         if (!getObjects(Olaf.class).isEmpty())  
         {  
@@ -60,26 +62,5 @@ public class Forest extends Levels
    public void act() {
        scrollDetect();
    }  
-    /*  
-    private void paint(int position) {
-        GreenfootImage bg = getBackground();
-        bg.drawImage(bgBase, position, 0);  
-        bg.drawImage(bgImage, position + picWidth, 0);  
-   }
-   
-   private void moveAllObjects(int distance) {
-       List<Ground> objects = getObjects(Ground.class);
-       for(int i = 0; i < objects.size(); i++) {
-           objects.get(i).setLocation(objects.get(i).getX() + distance, objects.get(i).getY());
-           //objects.get(i).turn(5);
-        }
-    }
-    
-   public Olaf getOlaf() {
-       return main;
-   }
-   public void endGame() {
-       main.deathAnimation();
-       Greenfoot.setWorld(new Forest());
-    }*/
+
 }

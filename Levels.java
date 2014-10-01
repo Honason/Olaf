@@ -1,6 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
-import java.util.Arrays;
 
 /**
  * Write a description of class Levels here.
@@ -68,4 +67,5 @@ public class Levels extends World
     public void endGame() {
         Greenfoot.setWorld(new Forest());
     }
+
 }
