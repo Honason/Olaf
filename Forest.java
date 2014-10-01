@@ -7,25 +7,20 @@ import java.util.List;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Forest extends World
+public class Forest extends Levels
 {
 
     /**
      * Constructor for objects of class Forest.
      * 
-     */
-    private static final String bgImageName = "forest_day.png";  
-    private static final int scrollSpeed = 4;  
-    private static final int picWidth = (new GreenfootImage(bgImageName)).getWidth();
-    public static final Olaf main = new Olaf();
+     */  
     private static final EvilViking evil1 = new EvilViking();
   
-    private GreenfootImage bgImage, bgBase;  
-    private int scrollPosition = 0;  
+        
     public Forest()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(900, 600, 1, false); 
+        
         setBackground(bgImageName);  
         bgImage = new GreenfootImage(getBackground());  
         bgBase = new GreenfootImage(picWidth, getHeight());  
@@ -63,33 +58,12 @@ public class Forest extends World
         }  
     }
    public void act() {
-         if(main.getX() >= 500 && Greenfoot.isKeyDown("right") && !main.isRightObstacle()) {
-             scrollPosition -= scrollSpeed;
-             moveAllObjects(-scrollSpeed);
-             if(scrollPosition < -picWidth) scrollPosition = 0;
-             paint(scrollPosition);
-            }
-         else if(main.getX() <= 300 && Greenfoot.isKeyDown("left") && !main.isLeftObstacle()) {
-             scrollPosition += scrollSpeed;
-             moveAllObjects(scrollSpeed);
-             if(scrollPosition > 0) scrollPosition = -picWidth;
-             paint(scrollPosition);
-            } 
+         scrollDetect();
    }  
       
-    private void paint(int position) {
-        GreenfootImage bg = getBackground();
-        bg.drawImage(bgBase, position, 0);  
-        bg.drawImage(bgImage, position + picWidth, 0);  
-   }
+    
    
-   private void moveAllObjects(int distance) {
-       List<Actor> objects = getObjects(Actor.class);
-       for(int i = 0; i < objects.size(); i++) {
-           if(objects.get(i) == main) continue;
-           objects.get(i).setLocation(objects.get(i).getX() + distance, objects.get(i).getY());
-        }
-    }
+   
     
    public Olaf getOlaf() {
        return main;
