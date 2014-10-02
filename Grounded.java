@@ -58,9 +58,9 @@ public class Grounded extends Actor
             xWeight = 0;
         } else {
             if(actorRight==true){
-                setImage(sprites[2]); 
+                setImage(sprites[1]); 
             } else {
-                setImage(sprites[3]);
+                setImage(sprites[4]);
             }
             fall();
         }
@@ -77,13 +77,13 @@ public class Grounded extends Actor
         return (getY() >= getWorld().getHeight());
     }
     public boolean isRightObstacle() {
-        Actor right = getOneObjectAtOffset(10, 0, Ground.class);
+        Actor right = getOneObjectAtOffset(20, (getImage().getHeight()/2)-1, Ground.class);
         Actor rightDown = getOneObjectAtOffset(20, 20, Ground.class);
         return right != null;
     }
 
     public boolean isLeftObstacle() {
-        Actor left = getOneObjectAtOffset(-10, 0, Ground.class);
+        Actor left = getOneObjectAtOffset(-20, (getImage().getHeight()/2)-1, Ground.class);
         Actor leftDown = getOneObjectAtOffset(-20, 20, Ground.class);
         return left != null;
     }
@@ -130,7 +130,6 @@ public class Grounded extends Actor
             inJump = inJump + 1;
         }
         weight = weight + acceleration;
-        //xWeight = xWeight + acceleration;
     }
     public void takeDamage(Actor troubleMaker) {
         if(getX() <= troubleMaker.getX()) knockback(-7,-7);

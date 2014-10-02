@@ -17,7 +17,7 @@ public class Olaf extends Grounded
         health = 3;
         dying = false;
         for(int i=0; i<6; i++) {
-            sprites[i] = "mario" + (i+1) + ".png";
+            sprites[i] = "olaf" + (i+1) + ".png";
         }
     };
 
@@ -27,22 +27,19 @@ public class Olaf extends Grounded
         if(dying)if(getY()<=dieOn) {Greenfoot.delay(60);Levels lvl = (Levels)getWorld();lvl.endGame();animating = false;};
         checkFall();
         if(outOfBounds()) deathAnimation();
+        
+    }    
+    
+    public void changeImage(int offset){
         if (chgImgIn == 1) {  
             chgImgIn = CHG_RATE; // reset countdown  
-
-            chgImg = (chgImg + 1) % 2;
-            if(chgImg == 0) {
-                imgNum++;
-            } else {
-                imgNum--;
-            }    
-
+            chgImg = (chgImg + 1) % 3;
             if(onGround()) {
-                setImage(sprites[imgNum]);
+                setImage(sprites[chgImg+offset]);
             }
 
         }
-    }    
+    }
 
     public int getChangeIn(){
         return chgImgIn;
@@ -73,7 +70,7 @@ public class Olaf extends Grounded
                 if(actorRight==true){
                     setImage(sprites[0]);
                 } else {
-                    setImage(sprites[1]);
+                    setImage(sprites[3]);
                 }
             }
         }
@@ -88,7 +85,7 @@ public class Olaf extends Grounded
         if(!isRightObstacle()){
             actorRight = true;
             chgImgIn = chgImgIn - 1;
-            imgNum = 1;
+            changeImage(0);
             if(getX() < 500) {
                 setLocation(getX() + speed, getY() );
             }
@@ -99,7 +96,7 @@ public class Olaf extends Grounded
         if(!isLeftObstacle()){
             actorRight = false;
             chgImgIn = chgImgIn - 1;
-            imgNum = 2;
+            changeImage(3);
             if(getX() > 300) {
                 setLocation(getX() - speed, getY() );
             }

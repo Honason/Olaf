@@ -49,13 +49,13 @@ public class Forest extends Levels
         addObject(new Ground(), 642, 446);
         
         addObject(main, 312, 144);
-        addObject(evil1, 200, 100);
+        addObject(evil1, 100, 100);
         
         if (!getObjects(Olaf.class).isEmpty())  
         {  
             for (Object olaf : getObjects(Olaf.class))  
             {  
-                ((Olaf) olaf).setImage("mario1.png");   
+                ((Olaf) olaf).setImage("olaf1.png");   
             }  
         }  
     }

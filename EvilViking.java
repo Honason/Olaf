@@ -64,9 +64,21 @@ public class EvilViking extends Enemy
         }
         
         if(nearOlaf() == 1) {
+            if (inFrontOfObstacle()==2 && goingRight==true) {
+                moveRight();
+                jump();
+            } else if (inFrontOfObstacle()==20 && goingRight==true && onGround()) {
+                knockback(3,-20);
+            }
             moveRight();
         }
         if(nearOlaf() == 2) {
+            if (inFrontOfObstacle()==1 && goingRight==false) {
+                moveLeft();
+                jump();
+            } else if (inFrontOfObstacle()==10 && goingRight==false && onGround()) {
+                knockback(-3,-20);
+            }
             moveLeft();
         }
         if(nearOlaf() == 3) {

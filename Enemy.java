@@ -34,11 +34,11 @@ public class Enemy extends Grounded
     }
     
     public void goingRight() {
-        if (inFrontOfObstacle() == 1 || inFrontOfObstacle() == 10) {
-            goingRight = true;
-        }
         if (inFrontOfObstacle() == 2 || inFrontOfObstacle() == 20) {
             goingRight = false;
+        }
+        if (inFrontOfObstacle() == 1 || inFrontOfObstacle() == 10) {
+            goingRight = true;
         }
     }
     
@@ -65,23 +65,22 @@ public class Enemy extends Grounded
     }
     
     public int nearOlaf() {
-        // Olaf is on the right, on the same Y value.
+        // Olaf is on the right and close
         if (Levels.main.getX() > getX() && 
            (Levels.main.getX()-getX() > 1) &&
-           (Levels.main.getX()-getX() < 200) &&
-           (Levels.main.getY() == getY())) {
+           (Levels.main.getX()-getX() < 200)) {
             olafWasX = Levels.main.getX();
             return 1;
         }
-        // Olaf is on the left, on the same Y value.
+        // Olaf is on the left and close
         if (Levels.main.getX() < getX() && 
            (getX()-Levels.main.getX() > 1) &&
-           (getX()-Levels.main.getX() < 200) &&
-           (Levels.main.getY() == getY()) ) {
+           (getX()-Levels.main.getX() < 200)) {
             olafWasX = Levels.main.getX();
             return 2;
         }
         
+        // Olaf is not on the reach, so just patrol.
         if(getX() < olafWasX && olafWasX != 0) {
             goingRight = true;
             olafWasX = 0;
