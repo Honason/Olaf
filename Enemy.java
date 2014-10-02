@@ -20,21 +20,24 @@ public class Enemy extends Grounded
     // Returns 1) if obstacle or hole is on the left, 1) if it's on the right, 0) if no obstacle
     public int inFrontOfObstacle() {
         Actor left = getOneObjectAtOffset(-10, 0, Ground.class);
-        Actor leftDown = getOneObjectAtOffset(-20, 20, Ground.class);
-        if (left != null || leftDown == null) return 1;
-        
+        if (left != null) return 1;
         Actor right = getOneObjectAtOffset(10, 0, Ground.class);
+        if (right != null) return 2;
+        
+        
+        Actor leftDown = getOneObjectAtOffset(-20, 20, Ground.class);
+        if (leftDown == null) return 10;
         Actor rightDown = getOneObjectAtOffset(20, 20, Ground.class);
-        if (right != null || rightDown == null) return 2;
+        if (rightDown == null) return 20;
         
         return 0;
     }
     
     public void goingRight() {
-        if (inFrontOfObstacle() == 1) {
+        if (inFrontOfObstacle() == 1 || inFrontOfObstacle() == 10) {
             goingRight = true;
         }
-        if (inFrontOfObstacle() == 2) {
+        if (inFrontOfObstacle() == 2 || inFrontOfObstacle() == 20) {
             goingRight = false;
         }
     }
@@ -44,7 +47,7 @@ public class Enemy extends Grounded
     }
     
     public void moveRight(){
-        if(!isRightObstacle()){
+        if(inFrontOfObstacle() != 2){
             actorRight = true;
             chgImgIn = chgImgIn - 1;
             imgNum = 1;
@@ -53,7 +56,7 @@ public class Enemy extends Grounded
     }
 
     public void moveLeft(){
-        if(!isLeftObstacle()){
+        if(inFrontOfObstacle() != 1){
             actorRight = false;
             chgImgIn = chgImgIn - 1;
             imgNum = 2;
@@ -88,12 +91,13 @@ public class Enemy extends Grounded
         }
         
         // Olaf is not on the same Y value.
-        if (Levels.main.getY() != getY()  
+        if (
+           (getX()-Levels.main.getX() < 200) &&
+           (getX()-Levels.main.getX() > -200)
         ) {
-            return 0;
+            return 3;
         }
         // Olaf was on the right
-        
         return 0;
     }
     

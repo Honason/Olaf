@@ -33,6 +33,11 @@ public class Grounded extends Actor
     {
         // Add your action code here.
     }    
+    public void knockback(int xPower, int yPower) {
+        weight = yPower;
+        xWeight = xPower;
+        fall();
+    }
     
     public void jump() {
         if (onGround()==true) {
@@ -44,11 +49,6 @@ public class Grounded extends Actor
             fall();
             inJump = 3;
         }
-    }
-    public void knockback(int xPower, int yPower) {
-        weight = yPower;
-        xWeight = xPower;
-        fall();
     }
 
     public void checkFall(){
@@ -77,11 +77,13 @@ public class Grounded extends Actor
     }
     public boolean isRightObstacle() {
         Actor right = getOneObjectAtOffset(10, 0, Ground.class);
+        Actor rightDown = getOneObjectAtOffset(20, 20, Ground.class);
         return right != null;
     }
 
     public boolean isLeftObstacle() {
         Actor left = getOneObjectAtOffset(-10, 0, Ground.class);
+        Actor leftDown = getOneObjectAtOffset(-20, 20, Ground.class);
         return left != null;
     }
 

@@ -26,10 +26,8 @@ public class EvilViking extends Enemy
         checkFall();
 
         if (chgImgIn <= 1) {  
-            chgImgIn = CHG_RATE; // reset countdown  
-            
+            chgImgIn = CHG_RATE; // reset countdown
             chgImg = (chgImg + 1) % 2;
-           
             
             if(chgImg == 0) {
                 imgNum++;
@@ -66,6 +64,28 @@ public class EvilViking extends Enemy
         }
         if(nearOlaf() == 2) {
             moveLeft();
+        }
+        if(nearOlaf() == 3) {
+            if (inFrontOfObstacle()==1 && goingRight==false) {
+                moveLeft();
+                jump();
+            } else if (inFrontOfObstacle()==2 && goingRight==true) {
+                moveRight();
+                jump();
+            } else if (inFrontOfObstacle()==10 && goingRight==false && onGround()) {
+                knockback(-5,-20);
+            } else if (inFrontOfObstacle()==20 && goingRight==true && onGround()) {
+                knockback(5,-20);
+            } else {
+                goingRight();
+                if(goingRight==true){
+                    moveRight();
+                }
+                if(goingRight==false){
+                    moveLeft();
+                }
+            }
+            
         }
     }
 
