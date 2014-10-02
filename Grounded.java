@@ -46,8 +46,8 @@ public class Grounded extends Actor
         }
     }
     public void knockback(int xPower, int yPower) {
-        weight = xPower;
-        xWeight = yPower;
+        weight = yPower;
+        xWeight = xPower;
         fall();
     }
 

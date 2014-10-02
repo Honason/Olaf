@@ -16,16 +16,21 @@ public class EvilViking extends Enemy
             sprites[i] = "evilmario" + (i+1) + ".png";
         }
     };
+    
+    public int getChgImgIn() {return chgImgIn;}
+    public int getChgImg() {return chgImg;}
 
     public void act() 
     {   
         ai();
         checkFall();
 
-        if (chgImgIn == 1) {  
+        if (chgImgIn <= 1) {  
             chgImgIn = CHG_RATE; // reset countdown  
-
+            
             chgImg = (chgImg + 1) % 2;
+           
+            
             if(chgImg == 0) {
                 imgNum++;
             } else {
@@ -46,7 +51,7 @@ public class EvilViking extends Enemy
     private void ai() {
         //jump();
         if(isTouching(Olaf.class)) Levels.main.takeDamage(this);
-        if(nearOlaf() == 0) {
+        if(nearOlaf() == 0) { 
             goingRight();
             if(goingRight==true){
                 moveRight();

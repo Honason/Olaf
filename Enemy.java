@@ -10,6 +10,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Enemy extends Grounded
 {
     public boolean goingRight = true;
+    public int olafWasX = 0;
 
     public void act() 
     {
@@ -61,16 +62,39 @@ public class Enemy extends Grounded
     }
     
     public int nearOlaf() {
-        if (Levels.main.getX() > getX() && (Levels.main.getX()-getX() > 30) && (Levels.main.getY() == getY())) {
+        // Olaf is on the right, on the same Y value.
+        if (Levels.main.getX() > getX() && 
+           (Levels.main.getX()-getX() > 1) &&
+           (Levels.main.getX()-getX() < 200) &&
+           (Levels.main.getY() == getY())) {
+            olafWasX = Levels.main.getX();
             return 1;
         }
-        if (Levels.main.getX() < getX() && (getX()-Levels.main.getX() > 30) && (Levels.main.getY() == getY()) ) {
+        // Olaf is on the left, on the same Y value.
+        if (Levels.main.getX() < getX() && 
+           (getX()-Levels.main.getX() > 1) &&
+           (getX()-Levels.main.getX() < 200) &&
+           (Levels.main.getY() == getY()) ) {
+            olafWasX = Levels.main.getX();
             return 2;
         }
-        if (Levels.main.getY() != getY() ) {
+        
+        if(getX() < olafWasX && olafWasX != 0) {
+            goingRight = true;
+            olafWasX = 0;
+        } else if (getX() > olafWasX && olafWasX != 0) {
+            goingRight = false;
+            olafWasX = 0;
+        }
+        
+        // Olaf is not on the same Y value.
+        if (Levels.main.getY() != getY()  
+        ) {
             return 0;
         }
-        return 3;
+        // Olaf was on the right
+        
+        return 0;
     }
     
     public int whereIsOlaf() {

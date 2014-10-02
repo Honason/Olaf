@@ -57,6 +57,7 @@ public class Levels extends World
         List<Actor> objects = getObjects(Actor.class);
         for(int i = 0; i < objects.size(); i++) {
             if(objects.get(i) == main) continue;
+            //if(objects.get(i).getClass().equals("class EvilViking")) continue;
             objects.get(i).setLocation(objects.get(i).getX() + distance, objects.get(i).getY());
         }
     }
