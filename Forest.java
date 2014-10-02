@@ -45,7 +45,7 @@ public class Forest extends Levels
         }
         //Ground ground = new Ground();
         addObject(new Ground(), 428, 446);
-        addObject(new Ground(), 428, 339);
+        //addObject(new Ground(), 428, 339);
         addObject(new Ground(), 642, 446);
         
         addObject(main, 312, 144);
