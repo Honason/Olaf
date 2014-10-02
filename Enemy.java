@@ -13,7 +13,7 @@ public class Enemy extends Grounded
 
     public void act() 
     {
-        // Add your action code here.
+        if(dying)if(getY()<=dieOn) setLocation(10,10);//getWorld().removeObject(this);
     }    
     
     // Returns 1) if obstacle or hole is on the left, 1) if it's on the right, 0) if no obstacle
@@ -61,10 +61,10 @@ public class Enemy extends Grounded
     }
     
     public int nearOlaf() {
-        if (Levels.main.getX() > getX() && (Levels.main.getX()-getX() > 30) && (Levels.main.getY() == getY())) {
+        if (Levels.main.getX() > getX() && (Levels.main.getX()-getX() > 1) && (Levels.main.getY() == getY())) {
             return 1;
         }
-        if (Levels.main.getX() < getX() && (getX()-Levels.main.getX() > 30) && (Levels.main.getY() == getY()) ) {
+        if (Levels.main.getX() < getX() && (getX()-Levels.main.getX() > 1) && (Levels.main.getY() == getY()) ) {
             return 2;
         }
         if (Levels.main.getY() != getY() ) {
@@ -74,6 +74,8 @@ public class Enemy extends Grounded
     }
     
     public int whereIsOlaf() {
-        return Forest.main.getX();
+        return Levels.main.getX();
     }
+    
+
 }

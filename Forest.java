@@ -13,7 +13,7 @@ public class Forest extends Levels
      * Constructor for objects of class Forest.
      * 
      */
-    private static final EvilViking evil1 = new EvilViking();
+    private EvilViking evil1 = new EvilViking();
     public Forest()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.

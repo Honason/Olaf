@@ -19,9 +19,10 @@ public class EvilViking extends Enemy
 
     public void act() 
     {   
+        if(dying)if(getY()<=dieOn) {getWorld().removeObject(this);return;};
         ai();
         checkFall();
-
+        
         if (chgImgIn == 1) {  
             chgImgIn = CHG_RATE; // reset countdown  
 
@@ -41,6 +42,10 @@ public class EvilViking extends Enemy
 
     public int getChangeIn(){
         return chgImgIn;
+    }
+    public int getSpeed() {
+        if(goingRight)return speed;
+        else return -speed;
     }
 
     private void ai() {

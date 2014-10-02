@@ -10,11 +10,12 @@ import java.util.Arrays;
  */
 public class Olaf extends Grounded
 {   
-    private int health = 3;
-    private boolean animating = false;
+    
     public Olaf(){
         animating = false;
         speed = 4;
+        health = 3;
+        dying = false;
         for(int i=0; i<6; i++) {
             sprites[i] = "mario" + (i+1) + ".png";
         }
@@ -22,7 +23,8 @@ public class Olaf extends Grounded
 
     public void act() 
     {   
-        if(xWeight == 0) checkKeys();
+        if(xWeight == 0 && !animating) checkKeys();
+        if(dying)if(getY()<=dieOn) {Greenfoot.delay(60);Levels lvl = (Levels)getWorld();lvl.endGame();animating = false;};
         checkFall();
         if(outOfBounds()) deathAnimation();
         if (chgImgIn == 1) {  
@@ -55,13 +57,13 @@ public class Olaf extends Grounded
             if (attacking != -1)  
             {  
                 /*if (dir == 0)  
-                    attDir = dir;  
+                attDir = dir;  
                 else  
-                    attDir = dir + 7;  */
+                attDir = dir + 7;  */
                 setImage(sprites[attacking / animationSpeed + 4]);
                 attack();
                 if (++attacking > 1 * animationSpeed) attacking = -1;
-           } else if (Greenfoot.isKeyDown("space") && !spaceLastPressed) {
+            } else if (Greenfoot.isKeyDown("space") && !spaceLastPressed) {
                 spaceLastPressed = true;
                 attacking = 0;
                 if(getImage().getWidth() == 17) setLocation(getX() + 4, getY());
@@ -81,27 +83,7 @@ public class Olaf extends Grounded
         }
 
     }
-    public void takeDamage(Actor troubleMaker) {
-        if(getX() <= troubleMaker.getX()) knockback(-7,-7);
-        else knockback(7,-7);
-        if(--health == 0) {
-            animating = false;
-            Levels lvl = (Levels)getWorld();
-            lvl.endGame();
-        }
-    }
-    public void deathAnimation() {
-        if(!animating) {
-            animating = true;
-            weight = -20;
-            inJump = 3;
-            fall();
-        } else {
-            animating = false;
-            Levels lvl = (Levels)getWorld();
-            lvl.endGame();
-        }
-    }
+
     public void moveRight(){
         if(!isRightObstacle()){
             actorRight = true;
@@ -123,5 +105,22 @@ public class Olaf extends Grounded
             }
         }
     }
-
+    public void attack() {
+        List<Enemy> objs = getIntersectingObjects( Enemy.class );
+         if (objs.size() > 0)  
+        {  
+            for(Enemy o : objs) {
+                Enemy temp = o;
+                temp.takeDamage(this);
+            }
+        }
+    }
+    public void deathAnimation() {
+        animating = true;
+        dying = true;
+        dieOn = getY() - 80;
+        weight = -20;
+        xWeight = 0;
+        jump();
+    }
 }

@@ -23,15 +23,17 @@ public class Grounded extends Actor
     public int chgImg = 0; // Are we supposed to change the picture? 0/1
     
     public String[] sprites = new String[10]; 
-
+    public int health = 1;
+    public boolean animating = false, dying;
+    public int dieOn;
     public int attacking = -1;  
     public int animationSpeed = 4;
     public boolean spaceLastPressed = false;
-    public String[] enemies = { "Goomba", "Bowser"}; 
+    public String[] enemies = { "class EvilViking", "Bowser"}; 
 
     public void act() 
     {
-        // Add your action code here.
+        
     }    
     
     public void jump() {
@@ -46,8 +48,8 @@ public class Grounded extends Actor
         }
     }
     public void knockback(int xPower, int yPower) {
-        weight = xPower;
-        xWeight = yPower;
+        weight = yPower;
+        xWeight = xPower;
         fall();
     }
 
@@ -107,24 +109,20 @@ public class Grounded extends Actor
                 setLocation(getX(), getY() + 1);
                 if (onGround()) {
                     break;
-                } else if(outOfBounds()) {
-                    //if(String.valueOf(this.getClass()).equals(String.valueOf(Olaf.class))) {Greenfoot.setWorld(new Forest());
-                }
+                } 
             }
         }
         if(xWeight < 0) {
             for (int i=xWeight/2; i<=0; i++) {
-                setLocation(getX() - 1, getY());
-                if (onGround()) {
+                if (isLeftObstacle()) {
                     break;
-                }
+                } else setLocation(getX() - 1, getY());
             }
         } else if(xWeight > 0) {
             for (int i=0; i<=xWeight/2; i++) {
-                setLocation(getX() + 1, getY());
-                if (onGround()) {
+                if (isRightObstacle()) {
                     break;
-                }
+                } else setLocation(getX() + 1, getY());
             }
         }
         if (!Greenfoot.isKeyDown("up") && inJump==1) {
@@ -133,16 +131,18 @@ public class Grounded extends Actor
         weight = weight + acceleration;
         //xWeight = xWeight + acceleration;
     }
-
-    public void attack() {
-        List<Object> objs = getIntersectingObjects( null );
-         if (objs.size() > 0)  
-        {  
-            for(int i = 0; i < objs.size(); i++) {
-                if(Arrays.asList(enemies).indexOf(objs.get(i).getClass()) > -1) ;//objs.get(i).takeDamage();
-            }
-            
+    public void takeDamage(Actor troubleMaker) {
+        if(getX() <= troubleMaker.getX()) knockback(-7,-7);
+        else knockback(7,-7);
+        if(--health <= 0) {
+            deathAnimation();
         }
     }
-    
+    public void deathAnimation() {
+        dying = true;
+        dieOn = getY() - 80;
+        weight = -20;
+        xWeight = 0;
+        jump();
+    }
 }

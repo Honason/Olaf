@@ -17,7 +17,7 @@ public class Levels extends World
     public String bgImageName = "forest_day.png";  
     public int scrollSpeed = 4;  
     public int picWidth = (new GreenfootImage(bgImageName)).getWidth();
-    public static final Olaf main = new Olaf();
+    public static Olaf main = new Olaf();
 
     public GreenfootImage bgImage, bgBase;  
     public int scrollPosition = 0;  
@@ -39,7 +39,7 @@ public class Levels extends World
     }
 
     public void scrollDetect() {
-        if(main.getX() >= 500 && Greenfoot.isKeyDown("right") && !main.isRightObstacle()) {
+        if((main.getX() >= 500 && Greenfoot.isKeyDown("right") && !main.isRightObstacle())) {
             scrollPosition -= scrollSpeed;
             moveAllObjects(-scrollSpeed);
             if(scrollPosition < -picWidth) scrollPosition = 0;
@@ -55,9 +55,8 @@ public class Levels extends World
 
     public void moveAllObjects(int distance) {
         List<Actor> objects = getObjects(Actor.class);
-        for(int i = 0; i < objects.size(); i++) {
-            if(objects.get(i) == main) continue;
-            objects.get(i).setLocation(objects.get(i).getX() + distance, objects.get(i).getY());
+        for(Actor o : objects) {
+            o.setLocation(o.getX() + distance, o.getY());
         }
     }
 
@@ -66,7 +65,9 @@ public class Levels extends World
     }
 
     public void endGame() {
+        main = new Olaf();
         Greenfoot.setWorld(new Forest());
+        main.health = 3;
     }
 
 }
