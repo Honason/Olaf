@@ -2,3 +2,5 @@
 *.class
 *.ctxt
 *.db
+*.greenfoot
+*.list

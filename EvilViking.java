@@ -13,7 +13,7 @@ public class EvilViking extends Enemy
     public EvilViking(){
         speed = 2;
         for(int i=0; i<6; i++) {
-            sprites[i] = "evilmario" + (i+1) + ".png";
+            sprites[i] = "evilViking" + (i+1) + ".png";
         }
     };
     
@@ -25,21 +25,6 @@ public class EvilViking extends Enemy
         if(dying)if(getY()<=dieOn) {getWorld().removeObject(this);return;};
         ai();
         checkFall();
-        if (chgImgIn <= 1) {  
-            chgImgIn = CHG_RATE; // reset countdown
-            chgImg = (chgImg + 1) % 2;
-            
-            if(chgImg == 0) {
-                imgNum++;
-            } else {
-                imgNum--;
-            }    
-
-            if(onGround()) {
-                setImage(sprites[imgNum]);
-            }
-
-        }
     }    
 
     public int getChangeIn(){
@@ -104,7 +89,4 @@ public class EvilViking extends Enemy
             
         }
     }
-
-    
-
 }

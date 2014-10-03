@@ -18,7 +18,7 @@ public class Forest extends Levels
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
        super(900, 600, 1, false);
-       bgImageName = "forest_day.png";  
+       bgImageName = "cave_bg.jpg";  
        scrollSpeed = 4;  
        picWidth = (new GreenfootImage(bgImageName)).getWidth();        
         
@@ -57,7 +57,14 @@ public class Forest extends Levels
             {  
                 ((Olaf) olaf).setImage("olaf1.png");   
             }  
-        }  
+        }
+        if (!getObjects(EvilViking.class).isEmpty())  
+        {  
+            for (Object viking : getObjects(EvilViking.class))  
+            {  
+                ((EvilViking) viking).setImage("evilViking1.png");   
+            }  
+        } 
     }
    public void act() {
        scrollDetect();

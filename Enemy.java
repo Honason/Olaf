@@ -15,19 +15,30 @@ public class Enemy extends Grounded
     public void act() 
     {
         if(dying)if(getY()<=dieOn) setLocation(10,10);//getWorld().removeObject(this);
-    }    
+    }   
+    
+    public void changeImage(int offset){
+        if (chgImgIn == 1) {  
+            chgImgIn = CHG_RATE; // reset countdown  
+            chgImg = (chgImg + 1) % 3;
+            if(onGround()) {
+                setImage(sprites[chgImg+offset]);
+            }
+
+        }
+    }
     
     // Returns 1) if obstacle or hole is on the left, 1) if it's on the right, 0) if no obstacle
     public int inFrontOfObstacle() {
-        Actor left = getOneObjectAtOffset(-10, 0, Ground.class);
+        Actor left = getOneObjectAtOffset(-30, (getImage().getHeight()/2)-1, Ground.class);
         if (left != null) return 1;
-        Actor right = getOneObjectAtOffset(10, 0, Ground.class);
+        Actor right = getOneObjectAtOffset(30, (getImage().getHeight()/2)-1, Ground.class);
         if (right != null) return 2;
         
         
-        Actor leftDown = getOneObjectAtOffset(-20, 20, Ground.class);
+        Actor leftDown = getOneObjectAtOffset(-30, 40, Ground.class);
         if (leftDown == null) return 10;
-        Actor rightDown = getOneObjectAtOffset(20, 20, Ground.class);
+        Actor rightDown = getOneObjectAtOffset(30, 40, Ground.class);
         if (rightDown == null) return 20;
         
         return 0;

@@ -30,14 +30,13 @@ public class Olaf extends Grounded
         
     }    
     
-    public void changeImage(int offset){
+    public void changeImage(int offset, int animLenght){
         if (chgImgIn == 1) {  
             chgImgIn = CHG_RATE; // reset countdown  
-            chgImg = (chgImg + 1) % 3;
+            chgImg = (chgImg + 1) % animLenght;
             if(onGround()) {
                 setImage(sprites[chgImg+offset]);
             }
-
         }
     }
 
@@ -85,7 +84,7 @@ public class Olaf extends Grounded
         if(!isRightObstacle()){
             actorRight = true;
             chgImgIn = chgImgIn - 1;
-            changeImage(0);
+            changeImage(0,3);
             if(getX() < 500) {
                 setLocation(getX() + speed, getY() );
             }
@@ -96,7 +95,7 @@ public class Olaf extends Grounded
         if(!isLeftObstacle()){
             actorRight = false;
             chgImgIn = chgImgIn - 1;
-            changeImage(3);
+            changeImage(3,3);
             if(getX() > 300) {
                 setLocation(getX() - speed, getY() );
             }
