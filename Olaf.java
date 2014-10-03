@@ -31,7 +31,9 @@ public class Olaf extends Grounded
     }    
     
     public void changeImage(int offset, int animLenght){
+        
         if (chgImgIn == 1) {  
+            setLocation(getX()+1, getY());
             chgImgIn = CHG_RATE; // reset countdown  
             chgImg = (chgImg + 1) % animLenght;
             if(onGround()) {
@@ -45,31 +47,28 @@ public class Olaf extends Grounded
     }
 
     private void checkKeys() {
-        if (Greenfoot.isKeyDown("left")) {
+       if (Greenfoot.isKeyDown("left")) {
             moveLeft();
         } else if (Greenfoot.isKeyDown("right")) {
             moveRight();
         } else {
             if (attacking != -1)  
-            {  
-                /*if (dir == 0)  
-                attDir = dir;  
-                else  
-                attDir = dir + 7;  */
-                setImage(sprites[attacking / animationSpeed + 4]);
-                attack();
-                if (++attacking > 1 * animationSpeed) attacking = -1;
+            {
+                chgImgIn--;
+                if(actorRight) changeImage(10,5);
+                else changeImage(15,5);
+                if (++attacking > 5) attacking = -1;
             } else if (Greenfoot.isKeyDown("space") && !spaceLastPressed) {
                 spaceLastPressed = true;
+                attack();
                 attacking = 0;
-                if(getImage().getWidth() == 17) setLocation(getX() + 4, getY());
             }
             else if(spaceLastPressed && !Greenfoot.isKeyDown("space")) spaceLastPressed = false;
             else if (Greenfoot.getKey()==null) {
                 if(actorRight==true){
-                    setImage(sprites[0]);
+                    //setImage(sprites[0]);
                 } else {
-                    setImage(sprites[5]);
+                    //setImage(sprites[5]);
                 }
             }
         }
@@ -103,7 +102,7 @@ public class Olaf extends Grounded
     }
     public void attack() {
         List<Enemy> objs = getObjectsInRange(40, Enemy.class );
-         if (objs.size() > 0) {  
+        if (objs.size() > 0) {  
             for(Enemy o : objs) {
                 Enemy temp = o;
                 if(actorRight)if(temp.getX() > getX())temp.takeDamage(this);
