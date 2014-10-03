@@ -48,7 +48,7 @@ public class Forest extends Levels
         //addObject(new Ground(), 428, 339);
         addObject(new Ground(), 642, 446);
         
-        addObject(main, 312, 144);
+        addObject(main, 300, 133);
         addObject(evil1, 100, 100);
         
         if (!getObjects(Olaf.class).isEmpty())  

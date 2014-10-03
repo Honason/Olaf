@@ -102,12 +102,12 @@ public class Olaf extends Grounded
         }
     }
     public void attack() {
-        List<Enemy> objs = getIntersectingObjects( Enemy.class );
-         if (objs.size() > 0)  
-        {  
+        List<Enemy> objs = getObjectsInRange(40, Enemy.class );
+         if (objs.size() > 0) {  
             for(Enemy o : objs) {
                 Enemy temp = o;
-                temp.takeDamage(this);
+                if(actorRight)if(temp.getX() > getX())temp.takeDamage(this);
+                if(!actorRight)if(getX() > temp.getX()) temp.takeDamage(this);
             }
         }
     }

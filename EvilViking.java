@@ -37,7 +37,16 @@ public class EvilViking extends Enemy
 
     private void ai() {
         //jump();
-        if(isTouching(Olaf.class)) Levels.main.takeDamage(this);
+        if(isTouching(Olaf.class)){
+            int oX = Levels.main.getX();
+            int eX = getX();
+            if(oX > eX) { //Attack right
+                if(oX - 20 <= eX + 40) Levels.main.takeDamage(this);
+            } else { //Attack Left
+                if(eX - 40 <= oX + 20) Levels.main.takeDamage(this);
+            }
+        }
+        //if(isTouching(Olaf.class)) Levels.main.takeDamage(this);
         if(nearOlaf() == 0) { 
             goingRight();
             if(goingRight==true){
