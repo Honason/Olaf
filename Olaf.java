@@ -16,7 +16,7 @@ public class Olaf extends Grounded
         speed = 4;
         health = 3;
         dying = false;
-        for(int i=0; i<6; i++) {
+        for(int i=0; i<20; i++) {
             sprites[i] = "olaf" + (i+1) + ".png";
         }
     };
@@ -69,7 +69,7 @@ public class Olaf extends Grounded
                 if(actorRight==true){
                     setImage(sprites[0]);
                 } else {
-                    setImage(sprites[3]);
+                    setImage(sprites[5]);
                 }
             }
         }
@@ -84,7 +84,7 @@ public class Olaf extends Grounded
         if(!isRightObstacle()){
             actorRight = true;
             chgImgIn = chgImgIn - 1;
-            changeImage(0,3);
+            changeImage(1,3);
             if(getX() < 500) {
                 setLocation(getX() + speed, getY() );
             }
@@ -95,7 +95,7 @@ public class Olaf extends Grounded
         if(!isLeftObstacle()){
             actorRight = false;
             chgImgIn = chgImgIn - 1;
-            changeImage(3,3);
+            changeImage(6,3);
             if(getX() > 300) {
                 setLocation(getX() - speed, getY() );
             }
