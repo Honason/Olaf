@@ -78,13 +78,11 @@ public class Grounded extends Actor
     }
     public boolean isRightObstacle() {
         Actor right = getOneObjectAtOffset(20, (getImage().getHeight()/2)-1, Ground.class);
-        Actor rightDown = getOneObjectAtOffset(20, 20, Ground.class);
         return right != null;
     }
 
     public boolean isLeftObstacle() {
         Actor left = getOneObjectAtOffset(-20, (getImage().getHeight()/2)-1, Ground.class);
-        Actor leftDown = getOneObjectAtOffset(-20, 20, Ground.class);
         return left != null;
     }
 

@@ -17,12 +17,12 @@ public class Enemy extends Grounded
         if(dying)if(getY()<=dieOn) setLocation(10,10);//getWorld().removeObject(this);
     }   
     
-    public void changeImage(int offset){
+    public void changeImage(int offset, int animLenght){
         if (chgImgIn == 1) {  
             chgImgIn = CHG_RATE; // reset countdown  
-            chgImg = (chgImg + 1) % 3;
+            chgImg = (chgImg + 1) % animLenght;
             if(onGround()) {
-                setImage(sprites[chgImg+offset]);
+                setImage(sprites[(chgImg+offset)]);
             }
 
         }
@@ -61,7 +61,7 @@ public class Enemy extends Grounded
         if(inFrontOfObstacle() != 2){
             actorRight = true;
             chgImgIn = chgImgIn - 1;
-            imgNum = 1;
+            changeImage(0,5);
             setLocation(getX() + speed, getY() );
         }
     }
@@ -70,7 +70,7 @@ public class Enemy extends Grounded
         if(inFrontOfObstacle() != 1){
             actorRight = false;
             chgImgIn = chgImgIn - 1;
-            imgNum = 2;
+            changeImage(5,5);
             setLocation(getX() - speed, getY() );
         }
     }
