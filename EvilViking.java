@@ -12,7 +12,7 @@ public class EvilViking extends Enemy
 {   
     public EvilViking(){
         speed = 2;
-        for(int i=0; i<10; i++) {
+        for(int i=0; i<18; i++) {
             sprites[i] = "evilViking" + (i+1) + ".png";
         }
     };

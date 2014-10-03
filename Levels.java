@@ -14,7 +14,7 @@ public class Levels extends World
      * Constructor for objects of class Levels.
      * 
      */
-    public String bgImageName = "forest_day.png";  
+    public String bgImageName = "cave_bg.jpg";  
     public int scrollSpeed = 4;  
     public int picWidth = (new GreenfootImage(bgImageName)).getWidth();
     public static Olaf main = new Olaf();

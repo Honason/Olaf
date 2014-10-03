@@ -22,7 +22,7 @@ public class Grounded extends Actor
     public int imgNum = 1; // Image ID
     public int chgImg = 0; // Are we supposed to change the picture? 0/1
     
-    public String[] sprites = new String[10]; 
+    public String[] sprites = new String[20]; 
     public int health = 1;
     public boolean animating = false, dying;
     public int dieOn;
@@ -58,9 +58,9 @@ public class Grounded extends Actor
             xWeight = 0;
         } else {
             if(actorRight==true){
-                setImage(sprites[1]); 
+                setImage(sprites[4]); 
             } else {
-                setImage(sprites[4]);
+                setImage(sprites[9]);
             }
             fall();
         }
