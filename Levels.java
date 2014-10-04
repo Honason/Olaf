@@ -21,7 +21,10 @@ public class Levels extends World
     public static Heart heart1 = new Heart();
     public static Heart heart2 = new Heart();
     public static Heart heart3 = new Heart();
-
+    GreenfootSound backgroundMusic = new GreenfootSound("music.mp3"); 
+    public static GreenfootSound axeSound = new GreenfootSound("axe.mp3"); 
+    public static GreenfootSound swordSound = new GreenfootSound("sword.mp3"); 
+    
     public GreenfootImage bgImage, bgBase;  
     public int scrollPosition = 0;  
     public Levels(int width, int height, int cellsize, boolean bounded)
@@ -79,6 +82,12 @@ public class Levels extends World
         main = new Olaf();
         Greenfoot.setWorld(new Forest());
         main.health = 3;
+        backgroundMusic.pause();  
     }
-
+    
+    public void stopped(){backgroundMusic.pause();}  
+      
+    public void started(){backgroundMusic.playLoop();} 
+    public static void axeSound(){axeSound.play(); }
+    public static void swordSound(){swordSound.play(); }
 }

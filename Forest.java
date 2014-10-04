@@ -23,8 +23,9 @@ public class Forest extends Levels
        super(900, 600, 1, false);
        bgImageName = "cave_bg.jpg";  
        scrollSpeed = 4;  
-       picWidth = (new GreenfootImage(bgImageName)).getWidth();        
-        
+       picWidth = (new GreenfootImage(bgImageName)).getWidth();   
+       started();
+       
        setBackground(bgImageName);  
        bgImage = new GreenfootImage(getBackground());  
        bgBase = new GreenfootImage(picWidth, getHeight());  
@@ -74,10 +75,11 @@ public class Forest extends Levels
             {  
                 ((EvilViking) viking).setImage("evilViking1.png");   
             }  
-        } 
+        }
     }
    public void act() {
        scrollDetect();
    }  
+   
 
 }

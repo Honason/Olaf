@@ -42,6 +42,8 @@ public class Olaf extends Grounded
     }
 
     private void checkKeys() {
+       if(Greenfoot.isKeyDown("space")) {Levels.axeSound();}
+        
        if ((Greenfoot.isKeyDown("space") && inAttack == false) || inAttack == true) {
            inAttack = true;
            attack();

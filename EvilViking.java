@@ -46,7 +46,7 @@ public class EvilViking extends Enemy
         }
         
         if(inAttack==true){
-            
+            Levels.swordSound();
             if(oX > eX) { //Attack right
                 chgImgIn = chgImgIn - 1;
                 changeImage(11,3);
@@ -55,6 +55,15 @@ public class EvilViking extends Enemy
                     if(oX - 20 <= eX + 60 && Levels.main.immune == 0) {
                         Levels.main.takeDamage(this);
                         Levels.main.immune = 24;
+                        switch (Levels.main.health) {
+                            case 3: break;
+                            case 2: getWorld().removeObject(Levels.heart3);
+                                break;
+                            case 1: getWorld().removeObject(Levels.heart2);
+                                break;
+                            case 0: getWorld().removeObject(Levels.heart1);
+                            default: break;
+                        }
                     }
                 }
             } else { //Attack Left
