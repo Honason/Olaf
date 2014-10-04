@@ -29,61 +29,54 @@ public class Olaf extends Grounded
         if(outOfBounds()) deathAnimation();
         
     }    
-    
-    public void changeImage(int offset, int animLenght){
-        
-        if (chgImgIn == 1) {  
-            setLocation(getX()+1, getY());
-            chgImgIn = CHG_RATE; // reset countdown  
-            chgImg = (chgImg + 1) % animLenght;
-            if(onGround()) {
-                setImage(sprites[chgImg+offset]);
-            }
-        }
-    }
 
     public int getChangeIn(){
         return chgImgIn;
     }
 
     private void checkKeys() {
+       if ((Greenfoot.isKeyDown("space") && inAttack == false) || inAttack == true) {
+           inAttack = true;
+           attack();
+           chgImgIn = chgImgIn - 1;
+           if(actorRight) {
+               changeImage(10,5);
+               if (actualImage == 10) {
+                   inAttack = false;
+               }
+           } else {
+               changeImage(15,5);
+               if (actualImage == 15) {
+                   inAttack = false;
+               }
+           }
+       } 
+       
        if (Greenfoot.isKeyDown("left")) {
             moveLeft();
-        } else if (Greenfoot.isKeyDown("right")) {
+       } else if (Greenfoot.isKeyDown("right")) {
             moveRight();
-        } else {
-            if (attacking != -1)  
-            {
-                chgImgIn--;
-                if(actorRight) changeImage(10,5);
-                else changeImage(15,5);
-                if (++attacking > 5) attacking = -1;
-            } else if (Greenfoot.isKeyDown("space") && !spaceLastPressed) {
-                spaceLastPressed = true;
-                attack();
-                attacking = 0;
-            }
-            else if(spaceLastPressed && !Greenfoot.isKeyDown("space")) spaceLastPressed = false;
-            else if (Greenfoot.getKey()==null) {
-                if(actorRight==true){
-                    //setImage(sprites[0]);
-                } else {
-                    //setImage(sprites[5]);
-                }
-            }
-        }
-
-        if (Greenfoot.isKeyDown("up")) {
-            jump();
-        }
-
+       }  else if (Greenfoot.getKey()==null) {
+           if (inAttack == false) {
+               if(actorRight==true){
+                   setImage(sprites[0]);
+               } else {
+                   setImage(sprites[5]);
+               }
+           }
+       } 
+       if (Greenfoot.isKeyDown("up")) {
+           jump();
+       }
     }
 
     public void moveRight(){
-        if(!isRightObstacle()){
+        if(!isRightObstacle() && !(onGround() && inAttack==true)){
             actorRight = true;
-            chgImgIn = chgImgIn - 1;
-            changeImage(1,3);
+            if(onGround()){
+                chgImgIn = chgImgIn - 1;
+                changeImage(1,3);
+            }
             if(getX() < 500) {
                 setLocation(getX() + speed, getY() );
             }
@@ -91,10 +84,12 @@ public class Olaf extends Grounded
     }
 
     public void moveLeft(){
-        if(!isLeftObstacle()){
+        if(!isLeftObstacle() && !(onGround() && inAttack==true)){
             actorRight = false;
-            chgImgIn = chgImgIn - 1;
-            changeImage(6,3);
+            if(onGround()){
+                chgImgIn = chgImgIn - 1;
+                changeImage(6,3);
+            }
             if(getX() > 300) {
                 setLocation(getX() - speed, getY() );
             }
