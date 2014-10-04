@@ -50,7 +50,7 @@ public class Olaf extends Grounded
                    inAttack = false;
                }
            }
-       } 
+       }
        
        if (Greenfoot.isKeyDown("left")) {
             moveLeft();
@@ -96,7 +96,7 @@ public class Olaf extends Grounded
         }
     }
     public void attack() {
-        List<Enemy> objs = getObjectsInRange(40, Enemy.class );
+        List<Enemy> objs = getObjectsInRange(68, Enemy.class );
         if (objs.size() > 0) {  
             for(Enemy o : objs) {
                 Enemy temp = o;

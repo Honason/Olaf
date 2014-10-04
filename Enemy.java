@@ -11,22 +11,14 @@ public class Enemy extends Grounded
 {
     public boolean goingRight = true;
     public int olafWasX = 0;
+    public int seeOlaf = 0;
 
     public void act() 
     {
         if(dying)if(getY()<=dieOn) setLocation(10,10);//getWorld().removeObject(this);
     }   
     
-    public void changeImage(int offset, int animLenght){
-        if (chgImgIn == 1) {  
-            chgImgIn = CHG_RATE; // reset countdown  
-            chgImg = (chgImg + 1) % animLenght;
-            if(onGround()) {
-                setImage(sprites[(chgImg+offset)]);
-            }
 
-        }
-    }
     
     // Returns 1) if obstacle or hole is on the left, 1) if it's on the right, 0) if no obstacle
     public int inFrontOfObstacle() {
@@ -80,19 +72,31 @@ public class Enemy extends Grounded
         if (Levels.main.getX() > getX() && 
            (Levels.main.getX()-getX() > 1) &&
            (Levels.main.getX()-getX() < 200)) {
-            olafWasX = Levels.main.getX();
-            return 1;
+            if(seeOlaf == 20) {
+                olafWasX = Levels.main.getX();
+                return 1;
+            } else {
+                seeOlaf++;
+            }
+            if(seeOlaf<0 || seeOlaf>20) {seeOlaf=1;}
         }
         // Olaf is on the left and close
-        if (Levels.main.getX() < getX() && 
+        else if (Levels.main.getX() < getX() && 
            (getX()-Levels.main.getX() > 1) &&
            (getX()-Levels.main.getX() < 200)) {
-            olafWasX = Levels.main.getX();
-            return 2;
-        }
+            if(seeOlaf == 520) {
+                olafWasX = Levels.main.getX();
+                return 2;
+            } else {
+                seeOlaf++;
+            }
+            if(seeOlaf<500 || seeOlaf>520) {seeOlaf=501;}
+        }// else if ((getX()-Levels.main.getX() >= 200) || (Levels.main.getX()-getX() >= 200)) {
+         //   return 0;
+        //}
         
         // Olaf is not on the reach, so just patrol.
-        if(getX() < olafWasX && olafWasX != 0) {
+        else if(getX() < olafWasX && olafWasX != 0) {
             goingRight = true;
             olafWasX = 0;
         } else if (getX() > olafWasX && olafWasX != 0) {
@@ -100,13 +104,6 @@ public class Enemy extends Grounded
             olafWasX = 0;
         }
         
-        // Olaf is not on the same Y value.
-        if (
-           (getX()-Levels.main.getX() < 200) &&
-           (getX()-Levels.main.getX() > -200)
-        ) {
-            return 3;
-        }
         // Olaf was on the right
         return 0;
     }
