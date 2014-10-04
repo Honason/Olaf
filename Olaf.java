@@ -26,8 +26,15 @@ public class Olaf extends Grounded
         if(xWeight == 0 && !animating) checkKeys();
         if(dying)if(getY()<=dieOn) {Greenfoot.delay(60);Levels lvl = (Levels)getWorld();lvl.endGame();animating = false;};
         checkFall();
-        if(outOfBounds()) deathAnimation();
-        
+        if(outOfBounds()) {
+            getWorld().removeObject(Levels.heart3);
+            getWorld().removeObject(Levels.heart2);
+            getWorld().removeObject(Levels.heart1);
+            deathAnimation();
+        }
+        if(immune>0){
+            immune--;
+        }
     }    
 
     public int getChangeIn(){

@@ -16,6 +16,7 @@ public class Forest extends Levels
     private EvilViking evil1 = new EvilViking();
     private EvilViking evil2 = new EvilViking();
     private EvilViking evil3 = new EvilViking();
+    
     public Forest()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -38,7 +39,9 @@ public class Forest extends Levels
      */
     private void prepare()
     {
-        //Ground ground = new Ground();
+        for(int o = 0; o < 5; o++) {
+            addObject(new Fog(), o*1084, 300);
+        }
         for(int i = 0; i < 20; i++) {
             if(i == 5 || i == 8 || i == 12 || i == 13 || i == 18) continue;
             Ground ground = new Ground();
@@ -53,6 +56,10 @@ public class Forest extends Levels
         addObject(evil1, 600, 100);
         addObject(evil2, 1000, 100);
         addObject(evil3, 1400, 100);
+        
+        addObject(heart1, 420, 30);
+        addObject(heart2, 460, 30);
+        addObject(heart3, 500, 30);
         
         if (!getObjects(Olaf.class).isEmpty())  
         {  
