@@ -55,15 +55,6 @@ public class EvilViking extends Enemy
                     if(oX - 20 <= eX + 60 && Levels.main.immune == 0) {
                         Levels.main.takeDamage(this);
                         Levels.main.immune = 24;
-                        switch (Levels.main.health) {
-                            case 3: break;
-                            case 2: getWorld().removeObject(Levels.heart3);
-                                break;
-                            case 1: getWorld().removeObject(Levels.heart2);
-                                break;
-                            case 0: getWorld().removeObject(Levels.heart1);
-                            default: break;
-                        }
                     }
                 }
             } else { //Attack Left
@@ -74,15 +65,6 @@ public class EvilViking extends Enemy
                     if(eX - 60 <= oX + 20 && Levels.main.immune == 0) {
                         Levels.main.takeDamage(this);
                         Levels.main.immune = 24;
-                        switch (Levels.main.health) {
-                            case 3: break;
-                            case 2: getWorld().removeObject(Levels.heart3);
-                                break;
-                            case 1: getWorld().removeObject(Levels.heart2);
-                                break;
-                            case 0: getWorld().removeObject(Levels.heart1);
-                            default: break;
-                        }
                     }
                 }
             }

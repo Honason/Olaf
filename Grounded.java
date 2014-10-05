@@ -145,12 +145,13 @@ public class Grounded extends Actor
         weight = weight + acceleration;
     }
     public void takeDamage(Actor troubleMaker) {
+        if(this.getClass() == Olaf.class && Levels.main.immune != 0) return;
         if(getX() <= troubleMaker.getX()) knockback(-7,-7);
         else knockback(7,-7);
         if(--health <= 0) {
             deathAnimation();
         }
-        if(this.getClass() == Olaf.class && health >= 0) {Levels lvl = (Levels)getWorld();lvl.updateHearts(-1);};
+        if(this.getClass() == Olaf.class && health >= 0) {Levels lvl = (Levels)getWorld();lvl.updateHearts(-1);Levels.main.immune = 24;};
     }
     public void deathAnimation() {
         dying = true;

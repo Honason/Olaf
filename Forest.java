@@ -57,10 +57,7 @@ public class Forest extends Levels
         addObject(evil1, 600, 100);
         addObject(evil2, 1000, 100);
         addObject(evil3, 1400, 100);
-        
-        addObject(heart1, 420, 30);
-        addObject(heart2, 460, 30);
-        addObject(heart3, 500, 30);
+        addObject(new Bird(), 200, 100);
         
         if (!getObjects(Olaf.class).isEmpty())  
         {  
