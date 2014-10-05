@@ -29,6 +29,7 @@ public class Olaf extends Grounded
         if(outOfBounds()) {
             Levels lvl = (Levels)getWorld();
             lvl.updateHearts(-health);
+            health = 0;
             deathAnimation();
         }
         if(immune>0){

@@ -1,27 +1,23 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Forest here.
+ * Write a description of class Desolation here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Forest extends Levels
+public class Desolation extends Levels
 {
 
     /**
-     * Constructor for objects of class Forest.
+     * Constructor for objects of class Desolation.
      * 
      */
-    private EvilViking evil1 = new EvilViking();
-    private EvilViking evil2 = new EvilViking();
-    private EvilViking evil3 = new EvilViking();
-
-    public Forest()
-    {    
+    public Desolation()
+    {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(900, 600, 1, false);
-        bgImageName = "cave_bg.jpg";  
+        bgImageName = "desolation_bg.jpg";  
         scrollSpeed = 4;  
         picWidth = (new GreenfootImage(bgImageName)).getWidth();   
         started();
@@ -33,11 +29,6 @@ public class Forest extends Levels
 
         prepare();
     }
-
-    /**
-     * Prepare the world for the start of the program. That is: create the initial
-     * objects and add them to the world.
-     */
     private void prepare()
     {
         for(int o = 0; o < 5; o++) {
@@ -54,11 +45,10 @@ public class Forest extends Levels
         addObject(new Ground(), 642, 446);
 
         addObject(main, 50, 100);
-        addObject(evil1, 600, 100);
-        addObject(evil2, 1000, 100);
-        addObject(evil3, 1400, 100);
+        addObject(new EvilViking(), 600, 100);
+        addObject(new EvilViking(), 1000, 100);
+        addObject(new EvilViking(), 1400, 100);
         addObject(new Bird(), 200, 100);
-        addObject(new CaveGate(), 1840, 553); 
 
         if (!getObjects(Olaf.class).isEmpty())  
         {  
@@ -82,12 +72,7 @@ public class Forest extends Levels
             }  
         }
     }
-
-    public void nextLevel() {
-        Greenfoot.setWorld(new Desolation());
-    }
-
     public void act() {
         scrollDetect();
-    }  
+    }
 }

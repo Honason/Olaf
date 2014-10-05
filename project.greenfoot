@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Sun Oct 05 18:29:16 CEST 2014
+#Sun Oct 05 23:17:22 CEST 2014
 target10.editor.width=900
 target2.width=80
 target8.name=HUD
@@ -62,6 +62,7 @@ target5.name=Olaf
 world.lastInstantiated=Forest
 class.Heart.image=fullHeart.png
 mainWindow.width=1179
+class.Desolation.superclass=Levels
 target10.editor.y=43
 class.Bird.image=bird1.png
 target9.name=EvilViking
@@ -110,6 +111,7 @@ dependency5.from=Grounded
 target7.typeParameters=
 target2.name=Heart
 dependency9.from=Levels
+class.CaveGate.image=caveEntrance.png
 class.EvilViking.superclass=Enemy
 class.Fog.superclass=greenfoot.Actor
 target6.naviview.expanded=true
@@ -201,6 +203,7 @@ dependency20.to=Heart
 dependency5.type=UsesDependency
 target8.type=ClassTarget
 dependency18.to=Enemy
+class.CaveGate.superclass=greenfoot.Actor
 dependency13.from=EvilViking
 class.Forest.superclass=Levels
 dependency9.type=UsesDependency

@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Write a description of class Levels here.
@@ -18,12 +19,12 @@ public class Levels extends World
     public int scrollSpeed = 4;  
     public int picWidth = (new GreenfootImage(bgImageName)).getWidth();
     public static Olaf main = new Olaf();
-    public static Heart heart1 = new Heart();
-    public static Heart heart2 = new Heart();
-    public static Heart heart3 = new Heart();
     GreenfootSound backgroundMusic = new GreenfootSound("music.mp3"); 
     public static GreenfootSound axeSound = new GreenfootSound("axe.mp3"); 
-    public static GreenfootSound swordSound = new GreenfootSound("sword.mp3"); 
+    public static GreenfootSound swordSound = new GreenfootSound("sword.mp3");
+    
+    public int currentLevel = 0;
+    
     
     public GreenfootImage bgImage, bgBase;  
     public int scrollPosition = 0;  
@@ -67,7 +68,12 @@ public class Levels extends World
     }
 
     public void moveAllObjects(int distance) {
-        List<Grounded> objects = getObjects(Grounded.class);
+        List<Actor> objects = getObjects(Actor.class);
+        for(Actor o : objects) {
+            if(main.getClass() == o.getClass() || String.valueOf(o.getClass()).equals("class Heart")) continue;
+            o.setLocation(o.getX() + distance, o.getY());
+        }
+        /*List<Grounded> objects = getObjects(Grounded.class);
         for(Grounded o : objects) {
             o.setLocation(o.getX() + distance, o.getY());
         }
@@ -78,7 +84,7 @@ public class Levels extends World
         List<Ground> objectsGround = getObjects(Ground.class);
         for(Ground o : objectsGround) {
             o.setLocation(o.getX() + distance, o.getY());
-        }
+        }*/
     }
 
     public void updateHearts(int d) {
@@ -98,7 +104,9 @@ public class Levels extends World
     public Olaf getOlaf() {
         return main;
     }
-
+    public void nextLevel(int i) {
+        if(i == 1) Greenfoot.setWorld(new Desolation());
+    }
     public void endGame() {
         main = new Olaf();
         Greenfoot.setWorld(new Forest());

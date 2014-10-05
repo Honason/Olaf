@@ -16,6 +16,7 @@ public class Bird extends Enemy
     public int speed = 1;
     public void act() 
     {
+        if(dying) {getWorld().removeObject(this);return;};
         if(startX == -1337) startX = getX();
         if(getX() > startX+200) speed = -1;
         else if(getX() < startX-200) speed = 1;
