@@ -24,7 +24,7 @@ public class Forest extends Levels
        bgImageName = "cave_bg.jpg";  
        scrollSpeed = 4;  
        picWidth = (new GreenfootImage(bgImageName)).getWidth();   
-       started();
+       //started();
        
        setBackground(bgImageName);  
        bgImage = new GreenfootImage(getBackground());  
@@ -57,7 +57,8 @@ public class Forest extends Levels
         addObject(evil1, 600, 100);
         addObject(evil2, 1000, 100);
         addObject(evil3, 1400, 100);
-        addObject(new Bird(), 200, 100);
+        //addObject(new Bird(), 200, 100);
+        addObject(new Dragon(), 300, 100);
         
         if (!getObjects(Olaf.class).isEmpty())  
         {  
