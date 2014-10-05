@@ -16,9 +16,11 @@ public class Stone extends Bird
     public int counter = 0;
     public void act() 
     {
-        if(++counter == 2){++acceleration;counter=0;};
+        if(++counter == 10){++acceleration;counter=0;};
         setLocation(getX(), getY() + acceleration);
-        if(isTouching(Olaf.class)) Levels.main.takeDamage(this);
+        if(isTouching(Olaf.class) && getX()-Levels.main.getX()<20 && getX()-Levels.main.getX()>-20) {
+            Levels.main.takeDamage(this);
+        }
         if(outOfBounds()) {Levels lvl = (Levels)getWorld();lvl.removeObject(this);return;}
     }
 }
