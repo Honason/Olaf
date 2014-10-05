@@ -76,6 +76,13 @@ public class Forest extends Levels
                 ((EvilViking) viking).setImage("evilViking1.png");   
             }  
         }
+        if (!getObjects(Fog.class).isEmpty())  
+        {  
+            for (Object fogs : getObjects(Fog.class))  
+            {  
+                ((Fog) fogs).setImage("fog.png");   
+            }  
+        }
     }
    public void act() {
        scrollDetect();
