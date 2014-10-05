@@ -135,6 +135,7 @@ public class Grounded extends Actor
         if(--health <= 0) {
             deathAnimation();
         }
+        if(this.getClass() == Olaf.class && health >= 0) {Levels lvl = (Levels)getWorld();lvl.updateHearts(-1);};
     }
     public void deathAnimation() {
         dying = true;
