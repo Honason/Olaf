@@ -21,6 +21,6 @@ public class Stone extends Bird
         if(isTouching(Olaf.class) && getX()-Levels.main.getX()<20 && getX()-Levels.main.getX()>-20) {
             Levels.main.takeDamage(this);
         }
-        if(outOfBounds()) {Levels lvl = (Levels)getWorld();lvl.removeObject(this);return;}
+        if(outOfBounds() || isTouching(Ground.class)) {Levels lvl = (Levels)getWorld();lvl.removeObject(this);return;}
     }
 }

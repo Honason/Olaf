@@ -70,7 +70,8 @@ public class Levels extends World
     public void moveAllObjects(int distance) {
         List<Actor> objects = getObjects(Actor.class);
         for(Actor o : objects) {
-            if(main.getClass() == o.getClass() || String.valueOf(o.getClass()).equals("class Heart")) continue;
+            if(main.getClass() == o.getClass()
+            || String.valueOf(o.getClass()).equals("class Heart")) continue;
             o.setLocation(o.getX() + distance, o.getY());
         }
         /*List<Grounded> objects = getObjects(Grounded.class);
