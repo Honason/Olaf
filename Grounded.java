@@ -22,13 +22,14 @@ public class Grounded extends Actor
     public int imgNum = 1; // Image ID
     public int chgImg = 0; // Are we supposed to change the picture? 0/1
     
-    public String[] sprites = new String[20]; 
+    public String[] sprites = new String[20];
     public int health = 1;
     public boolean animating = false, dying;
     public int dieOn;
-    public int attacking = -1;  
+    public int immune = 0;
+    public boolean inAttack = false;
+    public int actualImage = 0;
     public int animationSpeed = 4;
-    public boolean spaceLastPressed = false;
     public String[] enemies = { "class EvilViking", "Bowser"}; 
 
     public void act() 
@@ -39,6 +40,18 @@ public class Grounded extends Actor
         weight = yPower;
         xWeight = xPower;
         fall();
+    }
+    
+    public void changeImage(int offset, int animLenght){
+        
+        if (chgImgIn == 1) {
+            chgImgIn = CHG_RATE; // reset countdown  
+            chgImg = (chgImg + 1) % animLenght;
+            //if(onGround() || inAttack == true) {
+                actualImage = chgImg+offset;
+                setImage(sprites[actualImage]);
+            //}
+        }
     }
     
     public void jump() {
@@ -57,11 +70,13 @@ public class Grounded extends Actor
             weight = 0;
             xWeight = 0;
         } else {
-            if(actorRight==true){
-                setImage(sprites[4]); 
-            } else {
+
+            if(actorRight==true && inAttack == false){
+                setImage(sprites[4]);
+            } else if (actorRight==false && inAttack == false) {
                 setImage(sprites[9]);
             }
+            
             fall();
         }
     }
