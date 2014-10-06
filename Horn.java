@@ -13,6 +13,7 @@ public class Horn extends Actor
     public void act() 
     {
         fly();
+        if(isTouching(Olaf.class)){Levels lvl = (Levels)getWorld();lvl.endGame();};
     }    
     
     public void fly() {

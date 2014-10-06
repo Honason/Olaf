@@ -108,13 +108,15 @@ public class Levels extends World
     public void nextLevel(int i) {
         if(i == 1) Greenfoot.setWorld(new Desolation());
     }
-    public void endGame() {
+    public void resetGame() {
         main = new Olaf();
         Greenfoot.setWorld(new Forest());
         main.health = 3;
         //backgroundMusic.pause();  
     }
-    
+    public void endGame() {
+        Greenfoot.setWorld(new EndScreen());
+    }
     //public void stopped(){backgroundMusic.pause();}  
       
     //public void started(){backgroundMusic.playLoop();} 

@@ -83,6 +83,8 @@ public class Grounded extends Actor
 
     public boolean onGround() {
         Actor under = getOneObjectAtOffset(0, getImage().getHeight()/2, Ground.class);
+        if(under == null) under = getOneObjectAtOffset(0, getImage().getHeight()/2, Platform.class);
+        if(under == null && getWorld().getObjects(Dragon.class) != null) under = getOneObjectAtOffset(0, getImage().getHeight()/2, Dragon.class);
         if (under!=null) {
             inJump = 0;
         }
@@ -155,6 +157,7 @@ public class Grounded extends Actor
     }
     public void deathAnimation() {
         dying = true;
+        if(this.getClass() == Dragon.class) return;
         dieOn = getY() - 80;
         weight = -20;
         xWeight = 0;

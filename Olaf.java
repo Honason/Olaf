@@ -14,7 +14,7 @@ public class Olaf extends Grounded
     public Olaf(){
         animating = false;
         speed = 4;
-        health = 3;
+        health = 5;
         dying = false;
         for(int i=0; i<20; i++) {
             sprites[i] = "olaf" + (i+1) + ".png";
@@ -24,7 +24,7 @@ public class Olaf extends Grounded
     public void act() 
     {   
         if(xWeight == 0 && !animating) checkKeys();
-        if(dying)if(getY()<=dieOn) {Greenfoot.delay(60);Levels lvl = (Levels)getWorld();lvl.endGame();animating = false;};
+        if(dying)if(getY()<=dieOn) {Greenfoot.delay(60);Levels lvl = (Levels)getWorld();lvl.resetGame();animating = false;};
         checkFall();
         if(outOfBounds()) {
             Levels lvl = (Levels)getWorld();

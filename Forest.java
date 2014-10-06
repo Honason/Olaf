@@ -32,7 +32,7 @@ public class Forest extends Levels
      */
     private void prepare()
     {
-        for(int o = 0; o < 5; o++) {
+        for(int o = 0; o < 0; o++) {
             addObject(new Fog(), o*1084, 300);
         }
         for(int i = 0; i < 25; i++) {
@@ -40,24 +40,20 @@ public class Forest extends Levels
             Ground ground = new Ground();
             addObject(ground, i*107, 553);
         }
-        //addObject(new Ground(), 428, 446);
+        addObject(main, 50, 100);
+        addObject(new Trap("trap2.png"), 300, 478);
         addObject(new Ground(), 642, 446);
+        addObject(new EvilViking(), 642, 354);
+        addObject(new Bird(), 1000, 100);
         addObject(new Ground(), 1070, 446);
+        addObject(new EvilViking(), 1100, 440);
         addObject(new Ground(), 1284, 446);
         addObject(new Ground(), 1712, 446);
         addObject(new Ground(), 1712, 339);
         addObject(new Ground(), 2033, 446);
-
-        addObject(main, 50, 100);
+        addObject(new EvilViking(), 2400, 440);
         
-        //addObject(new EvilViking(), 642, 354);
-        //addObject(new Dragon(), 300, 100);
-        //addObject(new Trap("trap2.png"), 300, 478);
-        //addObject(new Bird(), 1000, 100);
-        
-        addObject(new Horn(), 700, 100);
-        
-        addObject(new CaveGate(), 2000, 475);
+        addObject(new CaveGate(), 2600, 475);
         if (!getObjects(Olaf.class).isEmpty())  
         {  
             for (Object olaf : getObjects(Olaf.class))  
