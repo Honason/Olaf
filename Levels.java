@@ -19,7 +19,7 @@ public class Levels extends World
     public int scrollSpeed = 4;  
     public int picWidth = (new GreenfootImage(bgImageName)).getWidth();
     public static Olaf main = new Olaf();
-    GreenfootSound backgroundMusic = new GreenfootSound("music.mp3"); 
+    //GreenfootSound backgroundMusic = new GreenfootSound("music.mp3"); 
     public static GreenfootSound axeSound = new GreenfootSound("axe.mp3"); 
     public static GreenfootSound swordSound = new GreenfootSound("sword.mp3");
     
@@ -112,12 +112,12 @@ public class Levels extends World
         main = new Olaf();
         Greenfoot.setWorld(new Forest());
         main.health = 3;
-        backgroundMusic.pause();  
+        //backgroundMusic.pause();  
     }
     
-    public void stopped(){backgroundMusic.pause();}  
+    //public void stopped(){backgroundMusic.pause();}  
       
-    public void started(){backgroundMusic.playLoop();} 
+    //public void started(){backgroundMusic.playLoop();} 
     public static void axeSound(){axeSound.play(); }
     public static void swordSound(){swordSound.play(); }
 }

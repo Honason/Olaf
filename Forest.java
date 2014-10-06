@@ -9,14 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Forest extends Levels
 {
 
-    /**
-     * Constructor for objects of class Forest.
-     * 
-     */
-    private EvilViking evil1 = new EvilViking();
-    private EvilViking evil2 = new EvilViking();
-    private EvilViking evil3 = new EvilViking();
-
     public Forest()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -43,24 +35,29 @@ public class Forest extends Levels
         for(int o = 0; o < 5; o++) {
             addObject(new Fog(), o*1084, 300);
         }
-        for(int i = 0; i < 20; i++) {
-            if(i == 5 || i == 8 || i == 12 || i == 13 || i == 18) continue;
+        for(int i = 0; i < 25; i++) {
+            if(i == 4 || i == 8 || i == 14 || i == 17 || i == 18) continue;
             Ground ground = new Ground();
             addObject(ground, i*107, 553);
         }
-        //Ground ground = new Ground();
-        addObject(new Ground(), 428, 446);
-        //addObject(new Ground(), 428, 339);
+        //addObject(new Ground(), 428, 446);
         addObject(new Ground(), 642, 446);
+        addObject(new Ground(), 1070, 446);
+        addObject(new Ground(), 1284, 446);
+        addObject(new Ground(), 1712, 446);
+        addObject(new Ground(), 1712, 339);
+        addObject(new Ground(), 2033, 446);
 
         addObject(main, 50, 100);
-        addObject(evil1, 600, 100);
-        addObject(evil2, 1000, 100);
-        addObject(evil3, 1400, 100);
         
-        addObject(new Bird(), 200, 100);
-        addObject(new CaveGate(), 1840, 553);
-        addObject(new Dragon(), 300, 100);
+        //addObject(new EvilViking(), 642, 354);
+        //addObject(new Dragon(), 300, 100);
+        //addObject(new Trap("trap2.png"), 300, 478);
+        //addObject(new Bird(), 1000, 100);
+        
+        addObject(new Horn(), 700, 100);
+        
+        addObject(new CaveGate(), 2000, 475);
         if (!getObjects(Olaf.class).isEmpty())  
         {  
             for (Object olaf : getObjects(Olaf.class))  

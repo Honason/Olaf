@@ -14,8 +14,16 @@ public class Stone extends Bird
      */
     public int acceleration = 1;
     public int counter = 0;
+    
+    public Stone() {
+        sprites[0] = "rock.png";
+        sprites[1] = "rock1.png";
+    }
+    
     public void act() 
     {
+        chgImgIn = chgImgIn - 1;
+        changeImage(0,2);
         if(++counter == 10){++acceleration;counter=0;};
         setLocation(getX(), getY() + acceleration);
         if(isTouching(Olaf.class) && getX()-Levels.main.getX()<20 && getX()-Levels.main.getX()>-20) {
